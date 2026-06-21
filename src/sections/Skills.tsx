@@ -1,5 +1,5 @@
 import { Box, Typography, Container, Paper, Stack } from '@mui/material';
-import { useTheme } from '../theme';
+// import { useTheme } from '../theme';
 
 interface SkillCategory {
   name: string;
@@ -34,7 +34,7 @@ const skillCategories: SkillCategory[] = [
 ];
 
 export function Skills() {
-  const { colorScheme } = useTheme();
+  // const { colorScheme } = useTheme();
 
   return (
     <Box id="skills" component="section" sx={{ mb: 6 }}>
@@ -45,7 +45,7 @@ export function Skills() {
             fontSize: { xs: '1.75rem', md: '2.5rem' },
             fontWeight: 700,
             textTransform: 'uppercase',
-            color: colorScheme.primary,
+            // color: colorScheme.primary,
             mb: 3,
             letterSpacing: '0.05em',
           }}
@@ -64,7 +64,7 @@ export function Skills() {
               key={index}
               sx={{
                 p: 3,
-                bgcolor: colorScheme.surface,
+                // bgcolor: colorScheme.surface,
                 boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
                 borderRadius: '8px',
               }}
@@ -73,10 +73,9 @@ export function Skills() {
                 sx={{
                   fontSize: '1rem',
                   fontWeight: 600,
-                  color: colorScheme.primary,
+                  // color: colorScheme.primary,
                   mb: 2,
                   textTransform: 'uppercase',
-                  fontSize: '0.9rem',
                   letterSpacing: '0.05em',
                 }}
               >
@@ -95,7 +94,7 @@ export function Skills() {
                     sx={{
                       px: 2,
                       py: 1,
-                      bgcolor: colorScheme.accent,
+                      // bgcolor: colorScheme.accent,
                       color: '#FFFFFF',
                       borderRadius: '6px',
                       fontSize: '0.9rem',
