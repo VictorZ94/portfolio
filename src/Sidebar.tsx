@@ -20,6 +20,10 @@ import  useTheme from './theme';
 import { Hero } from './sections/Hero';
 import { useMediaQuery } from '@mui/material';
 import { About } from './sections/About';
+import { Experience } from './sections/Experience';
+import { Projects } from './sections/Projects';
+import { Skills } from './sections/Skills';
+import { Contact } from './sections/Contact';
 
 const drawerWidth = 240;
 
@@ -224,6 +228,10 @@ export default function ResponsiveDrawer() {
         {isMobile && <Toolbar />}
         <Hero />
         <About  />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Contact />
       </Box>
     </Box>
   );
