@@ -5,7 +5,7 @@ export function About() {
   // const { colorScheme } = useTheme();
 
   return (
-    <Box id="about" component="section" sx={{ mb: 6 }}>
+    <Box id="about" component="section" sx={{ mb: 6, height: '100vh' }}>
       <Container maxWidth="lg">
         <Typography
           variant="h2"
