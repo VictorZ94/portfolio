@@ -10,22 +10,24 @@ export function Hero() {
       id="hero"
       component="section"
       sx={{
-        bgcolor: '#FF5722',
+        bgcolor: '#c97358',
         height: '100vh',
         
       }}
     >
       <Container maxWidth="lg" sx={{ pt: 3 }}>
         <Typography
-          variant="h1"
+          variant="h2"
           sx={{
             fontWeight: 700,
             color: '#FFFFFF',
+            mb: 2,
           }}
         >
           Hi, I'm Victor Zuluaga
         </Typography>
         <Typography
+          component="span"
           variant="h3"
           sx={{
             fontWeight: 500,
@@ -36,19 +38,21 @@ export function Hero() {
         >
            I'm a
         </Typography>{" "}
-        <Typewriter
-          options={{
-            skipAddStyles: true,
-            wrapperClassName: "typewriter",
-            strings: ['Software Engineer', 'Web Developer', 'Tech Enthusiast'],
-            autoStart: true,
-            loop: true,
-          }}
-        />
+        <Typography variant="h3" sx={{ fontWeight: 500, color: 'rgba(255, 255, 255, 0.9)', mb: 4 }}>
+          <Typewriter
+            options={{
+              skipAddStyles: true,
+              wrapperClassName: "custom_typewriter",
+              strings: ['Software Engineer', 'Web Developer', 'Tech Enthusiast'],
+              autoStart: true,
+              loop: true,
+            }}
+          />
+        </Typography>
         <Typography
           variant="h5"
           sx={{
-            fontSize: { xs: '1rem', md: '1.25rem' },
+            fontSize: { xs: '1rem', md: '1.64rem' },
             color: 'rgba(255, 255, 255, 0.9)',
           }}
         >
