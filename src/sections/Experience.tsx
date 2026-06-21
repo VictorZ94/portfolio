@@ -1,5 +1,5 @@
 import { Box, Typography, Container, Paper, Stack } from '@mui/material';
-import { useTheme } from '../theme';
+// import { useTheme } from '../theme';
 
 interface Job {
   company: string;
@@ -42,7 +42,7 @@ const jobs: Job[] = [
 ];
 
 export function Experience() {
-  const { colorScheme } = useTheme();
+  // const { colorScheme } = useTheme();
 
   return (
     <Box id="experience" component="section" sx={{ mb: 6 }}>
@@ -53,7 +53,7 @@ export function Experience() {
             fontSize: { xs: '1.75rem', md: '2.5rem' },
             fontWeight: 700,
             textTransform: 'uppercase',
-            color: colorScheme.primary,
+            // color: colorScheme.primary,
             mb: 3,
             letterSpacing: '0.05em',
           }}
@@ -66,10 +66,10 @@ export function Experience() {
               key={index}
               sx={{
                 p: { xs: 3, md: 4 },
-                bgcolor: colorScheme.surface,
+                // bgcolor: colorScheme.surface,
                 boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
                 borderRadius: '8px',
-                borderLeft: `4px solid ${colorScheme.primary}`,
+                // borderLeft: `4px solid ${colorScheme.primary}`,
               }}
             >
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2, gap: 2 }}>
@@ -78,7 +78,7 @@ export function Experience() {
                     sx={{
                       fontSize: '1.1rem',
                       fontWeight: 600,
-                      color: colorScheme.text,
+                      // color: colorScheme.text,
                     }}
                   >
                     {job.role}
@@ -86,7 +86,7 @@ export function Experience() {
                   <Typography
                     sx={{
                       fontSize: '0.95rem',
-                      color: colorScheme.textSecondary,
+                      // color: colorScheme.textSecondary,
                     }}
                   >
                     {job.company}
@@ -95,7 +95,7 @@ export function Experience() {
                 <Typography
                   sx={{
                     fontSize: '0.9rem',
-                    color: colorScheme.textSecondary,
+                    // color: colorScheme.textSecondary,
                     whiteSpace: 'nowrap',
                   }}
                 >
@@ -109,7 +109,7 @@ export function Experience() {
                     component="li"
                     sx={{
                       fontSize: '0.95rem',
-                      color: colorScheme.text,
+                      // color: colorScheme.text,
                       mb: 1,
                       '&:last-child': { mb: 0 },
                     }}
