@@ -2,10 +2,10 @@ import { Box, Typography, Container, Paper, Button, Stack } from '@mui/material'
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { useTheme } from '../theme';
+// import { useTheme } from '../theme';
 
 export function Contact() {
-  const { colorScheme } = useTheme();
+  // const { colorScheme } = useTheme();
 
   const contacts = [
     {
@@ -37,7 +37,7 @@ export function Contact() {
             fontSize: { xs: '1.75rem', md: '2.5rem' },
             fontWeight: 700,
             textTransform: 'uppercase',
-            color: colorScheme.primary,
+            // color: colorScheme.primary,
             mb: 3,
             letterSpacing: '0.05em',
           }}
@@ -47,7 +47,7 @@ export function Contact() {
         <Paper
           sx={{
             p: { xs: 3, md: 4 },
-            bgcolor: colorScheme.surface,
+            // bgcolor: colorScheme.surface,
             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
             borderRadius: '8px',
             textAlign: 'center',
@@ -56,7 +56,7 @@ export function Contact() {
           <Typography
             sx={{
               fontSize: '1rem',
-              color: colorScheme.text,
+              // color: colorScheme.text,
               mb: 4,
             }}
           >
@@ -77,7 +77,7 @@ export function Contact() {
                   rel="noopener noreferrer"
                   startIcon={<Icon />}
                   sx={{
-                    bgcolor: colorScheme.primary,
+                    // bgcolor: colorScheme.primary,
                     color: '#FFFFFF',
                     px: 3,
                     py: 1.5,
@@ -85,7 +85,7 @@ export function Contact() {
                     textTransform: 'none',
                     fontSize: '1rem',
                     '&:hover': {
-                      bgcolor: colorScheme.secondary,
+                      // bgcolor: colorScheme.secondary,
                     },
                   }}
                 >
