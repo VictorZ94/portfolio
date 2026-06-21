@@ -1,5 +1,5 @@
 import { Box, Typography, Container, Paper, Stack, Chip } from '@mui/material';
-import { useTheme } from '../theme';
+// import { useTheme } from '../theme';
 
 interface Project {
   title: string;
@@ -42,7 +42,7 @@ const projects: Project[] = [
 ];
 
 export function Projects() {
-  const { colorScheme } = useTheme();
+  // const { colorScheme } = useTheme();
 
   return (
     <Box id="projects" component="section" sx={{ mb: 6 }}>
@@ -53,7 +53,7 @@ export function Projects() {
             fontSize: { xs: '1.75rem', md: '2.5rem' },
             fontWeight: 700,
             textTransform: 'uppercase',
-            color: colorScheme.primary,
+            // color: colorScheme.primary,
             mb: 3,
             letterSpacing: '0.05em',
           }}
@@ -72,7 +72,7 @@ export function Projects() {
               key={index}
               sx={{
                 p: 3,
-                bgcolor: colorScheme.surface,
+                // bgcolor: colorScheme.surface,
                 boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
                 borderRadius: '8px',
                 display: 'flex',
@@ -86,7 +86,7 @@ export function Projects() {
               <Box
                 sx={{
                   height: '160px',
-                  bgcolor: colorScheme.accent,
+                  // bgcolor: colorScheme.accent,
                   borderRadius: '6px',
                   mb: 2,
                   display: 'flex',
@@ -102,7 +102,7 @@ export function Projects() {
                 sx={{
                   fontSize: '1.1rem',
                   fontWeight: 600,
-                  color: colorScheme.text,
+                  // color: colorScheme.text,
                   mb: 1,
                 }}
               >
@@ -111,7 +111,7 @@ export function Projects() {
               <Typography
                 sx={{
                   fontSize: '0.95rem',
-                  color: colorScheme.textSecondary,
+                  // color: colorScheme.textSecondary,
                   mb: 2,
                   flexGrow: 1,
                 }}
@@ -125,7 +125,7 @@ export function Projects() {
                     label={tech}
                     size="small"
                     sx={{
-                      bgcolor: colorScheme.accent,
+                      // bgcolor: colorScheme.accent,
                       color: '#FFFFFF',
                       fontSize: '0.8rem',
                     }}
