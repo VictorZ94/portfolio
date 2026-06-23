@@ -1,4 +1,5 @@
 import { Box, Typography, Container, Paper, Stack } from '@mui/material';
+import SectionTitle from '../components/section-title';
 // import { useTheme } from '../theme';
 
 interface Job {
@@ -42,34 +43,18 @@ const jobs: Job[] = [
 ];
 
 export function Experience() {
-  // const { colorScheme } = useTheme();
-
   return (
     <Box id="experience" component="section" sx={{ mb: 6 }}>
+      <SectionTitle text="Experience" />
       <Container maxWidth="lg">
-        <Typography
-          variant="h2"
-          sx={{
-            fontSize: { xs: '1.75rem', md: '2.5rem' },
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            // color: colorScheme.primary,
-            mb: 3,
-            letterSpacing: '0.05em',
-          }}
-        >
-          Experience
-        </Typography>
         <Stack spacing={3}>
           {jobs.map((job, index) => (
             <Paper
               key={index}
               sx={{
                 p: { xs: 3, md: 4 },
-                // bgcolor: colorScheme.surface,
                 boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
                 borderRadius: '8px',
-                // borderLeft: `4px solid ${colorScheme.primary}`,
               }}
             >
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2, gap: 2 }}>

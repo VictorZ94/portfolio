@@ -1,5 +1,8 @@
+// @Packages
 import { Box, Typography, Container, Paper, Stack, Chip } from '@mui/material';
-// import { useTheme } from '../theme';
+
+// @Components
+import SectionTitle from '../components/section-title';
 
 interface Project {
   title: string;
@@ -46,6 +49,7 @@ export function Projects() {
 
   return (
     <Box id="projects" component="section" sx={{ mb: 6 }}>
+      <SectionTitle text="Projects" />
       <Container maxWidth="lg">
         <Typography
           variant="h2"

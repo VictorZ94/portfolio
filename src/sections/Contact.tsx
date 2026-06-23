@@ -2,6 +2,7 @@ import { Box, Typography, Container, Paper, Button, Stack } from '@mui/material'
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import SectionTitle from '../components/section-title';
 // import { useTheme } from '../theme';
 
 export function Contact() {
@@ -30,6 +31,7 @@ export function Contact() {
 
   return (
     <Box id="contact" component="section" sx={{ mb: 6 }}>
+      <SectionTitle text="Contact" />
       <Container maxWidth="lg">
         <Typography
           variant="h2"

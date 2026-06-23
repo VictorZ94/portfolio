@@ -1,5 +1,5 @@
 import { Box, Typography, Container } from '@mui/material';
-import useTheme from '../theme';
+// import useTheme from '../theme';
 import Typewriter from 'typewriter-effect';
 
 export function Hero() {

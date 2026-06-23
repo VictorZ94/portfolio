@@ -1,4 +1,5 @@
 import { Box, Typography, Container, Paper, Stack } from '@mui/material';
+import SectionTitle from '../components/section-title';
 // import { useTheme } from '../theme';
 
 interface SkillCategory {
@@ -38,6 +39,7 @@ export function Skills() {
 
   return (
     <Box id="skills" component="section" sx={{ mb: 6 }}>
+      <SectionTitle text="Skills" />
       <Container maxWidth="lg">
         <Typography
           variant="h2"

@@ -1,57 +1,39 @@
-import { Box, Typography, Container, Paper } from '@mui/material';
-// import { useTheme } from '../theme';
+// @Packages
+import { Box, Container, Typography } from '@mui/material';
+
+// @Components
+import SectionTitle from '../components/section-title';
 
 export function About() {
-  // const { colorScheme } = useTheme();
-
   return (
-    <Box id="about" component="section" sx={{ mb: 6, height: '100vh' }}>
+    <Box component="section" id="about">
+      <SectionTitle text="About Me" />
       <Container maxWidth="lg">
-        <Typography
-          variant="h2"
-          sx={{
-            fontSize: { xs: '1.75rem', md: '2.5rem' },
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            // color: colorScheme.primary,
-            mb: 3,
-            letterSpacing: '0.05em',
-          }}
-        >
-          About
-        </Typography>
-        <Paper
-          sx={{
-            p: { xs: 3, md: 4 },
-            // bgcolor: colorScheme.surface,
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
-            borderRadius: '8px',
-          }}
-        >
+        <Box sx={{ mb: 6, height: '100vh' }}>
           <Typography
             sx={{
-              fontSize: '1rem',
-              lineHeight: 1.8,
-              // color: colorScheme.text,
+              fontSize: '1.88rem',
               mb: 2,
             }}
           >
-            I'm a passionate software engineer with a focus on building scalable, user-centric applications.
-            With expertise in modern web technologies and a strong foundation in computer science fundamentals,
-            I thrive in collaborative environments where clean code and thoughtful design matter.
+            I’m a Frontend Engineer specialised in React and Next.js, with experience building modern, scalable, product-focused web applications. I focus on turning complex requirements and designs into clear, efficient, and maintainable user interfaces, with strong attention to user experience and code quality.
           </Typography>
           <Typography
             sx={{
-              fontSize: '1rem',
-              lineHeight: 1.8,
-              // color: colorScheme.text,
+              fontSize: '1.88rem',
+              mb: 2,
             }}
           >
-            My journey has taken me through full-stack development, where I've contributed to projects
-            ranging from startups to established tech companies. I'm committed to continuous learning
-            and staying current with industry best practices.
+            I’ve worked on real-world production products, taking ownership of complete features—from frontend implementation to API integrations and authentication flows. My approach is to deliver solid solutions with tangible impact, balancing speed, quality, and long-term maintainability.
           </Typography>
-        </Paper>
+          <Typography sx={{
+              fontSize: '1.88rem',
+            }}>
+            Languages: JavaScript, TypeScript, Python <br />
+            Frameworks: React, Next.js, Node.js, Nest.js, Django, FastAPI <br />
+            Tools: Git, Docker, AWS, Vercel, GCP, Attlassian, Pandas, NumPy, scikit-learn
+          </Typography>
+        </Box>
       </Container>
     </Box>
   );

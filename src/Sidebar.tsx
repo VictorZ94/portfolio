@@ -16,7 +16,7 @@ import { Avatar, Stack } from '@mui/material';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
-import  useTheme from './theme';
+// import  useTheme from './theme';
 import { Hero } from './sections/Hero';
 import { useMediaQuery } from '@mui/material';
 import { About } from './sections/About';
@@ -37,7 +37,7 @@ const navigationLinks = [
 ];
 
 function ResponsiveDrawerContent() {
-  const { colorScheme } = useTheme();
+  // const { colorScheme } = useTheme();
 
   const handleNavClick = (id: string) => {
     const element = document.getElementById(id);
@@ -54,18 +54,16 @@ function ResponsiveDrawerContent() {
             height: 120,
             mx: 'auto',
             mb: 2,
-            bgcolor: colorScheme.accent,
           }}
         >
           VZ
         </Avatar>
-        <Typography sx={{ fontWeight: 700, fontSize: '1.1rem', color: colorScheme.text, mb: 0.5 }}>
+        <Typography sx={{ fontWeight: 700, fontSize: '1.1rem', mb: 0.5 }}>
           Victor Zuluaga
         </Typography>
         <Typography
           sx={{
             fontSize: '0.85rem',
-            color: colorScheme.textSecondary,
           }}
         >
           Full-Stack Engineer
@@ -80,8 +78,6 @@ function ResponsiveDrawerContent() {
               sx={{
                 py: 1.5,
                 '&:hover': {
-                  bgcolor: colorScheme.accent,
-                  color: '#FFFFFF',
                 },
               }}
             >
@@ -112,7 +108,7 @@ function ResponsiveDrawerContent() {
           href="https://linkedin.com"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: colorScheme.primary }}
+          // sx={{ color: colorScheme.primary }}
         >
           <LinkedInIcon />
         </IconButton>
@@ -121,14 +117,14 @@ function ResponsiveDrawerContent() {
           href="https://github.com"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: colorScheme.primary }}
+          // sx={{ color: colorScheme.primary }}
         >
           <GitHubIcon />
         </IconButton>
         <IconButton
           size="small"
           href="mailto:zrvictor00@gmail.com"
-          sx={{ color: colorScheme.primary }}
+          // sx={{ color: colorScheme.primary }}
         >
           <EmailIcon />
         </IconButton>
@@ -140,7 +136,7 @@ function ResponsiveDrawerContent() {
 export default function ResponsiveDrawer() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
-  const { colorScheme } = useTheme();
+  // const { colorScheme } = useTheme();
   const isMobile = useMediaQuery('(max-width:600px)');
 
   const handleDrawerClose = () => {
@@ -169,10 +165,10 @@ export default function ResponsiveDrawer() {
           sx={{
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             ml: { sm: `${drawerWidth}px` },
-            bgcolor: colorScheme.surface,
-          color: colorScheme.text,
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
-        }}
+            // bgcolor: colorScheme.surface,
+            // color: colorScheme.text,
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
+          }}
         >
           <Toolbar>
             <IconButton
