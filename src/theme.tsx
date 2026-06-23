@@ -1,30 +1,21 @@
-import React, { createContext, useState, type ReactNode } from 'react';
-import { getColorScheme, orangeColorScheme, type ColorScheme } from './typed';
+import { createTheme } from '@mui/material/styles';
 
-interface ThemeContextType {
-  colorScheme: ColorScheme;
-  setColorVariant: (variant: 'orange' | 'blue' | 'green') => void;
-}
-
-export const ThemeContext = createContext<ThemeContextType>({
-  colorScheme: orangeColorScheme,
-  setColorVariant: () => {},
+export const theme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#E07A3F',
+    },
+    background: {
+      default: '#f5f5f5',
+      paper: '#ffffff',
+    },
+    text: {
+      primary: '#333333',
+      secondary: '#555555',
+    },
+  },
+  // typography: {
+  //   fontFamily: 'Inter, sans-serif',
+  // },
 });
-
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [colorScheme, setColorScheme] = useState<ColorScheme>(orangeColorScheme);
-
-  const setColorVariant = (variant: 'orange' | 'blue' | 'green') => {
-    setColorScheme(getColorScheme(variant));
-  };
-
-  return (
-    <ThemeContext.Provider value={{ colorScheme, setColorVariant }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-}
-
-export default function useTheme() {
-  return React.useContext(ThemeContext);
-}
