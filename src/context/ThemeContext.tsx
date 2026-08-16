@@ -10,15 +10,14 @@ function getInitialMode(): ThemeMode {
   if (typeof window === 'undefined') return 'light';
   const stored = window.localStorage.getItem(STORAGE_MODE);
   if (stored === 'light' || stored === 'dark') return stored;
-  const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-  return prefersDark ? 'dark' : 'light';
+  return 'light';
 }
 
 function getInitialInk(): InkKey {
-  if (typeof window === 'undefined') return 'pink';
+  if (typeof window === 'undefined') return 'lime';
   const stored = window.localStorage.getItem(STORAGE_INK);
   if (INK_OPTIONS.some((opt) => opt.key === stored)) return stored as InkKey;
-  return 'pink';
+  return 'lime';
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {

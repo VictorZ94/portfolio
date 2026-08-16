@@ -22,10 +22,9 @@ export function ThemeToggle() {
         sx={{
           fontFamily: 'var(--font-mono)',
           fontSize: '0.65rem',
-          letterSpacing: '0.18em',
+          letterSpacing: '0.1em',
           textTransform: 'uppercase',
-          color: 'var(--ink-text)',
-          opacity: 0.55,
+          color: 'var(--ink-mute)',
         }}
       >
         mode
@@ -44,62 +43,59 @@ export function ThemeToggle() {
         }}
         sx={{
           position: 'relative',
-          width: 52,
-          height: 26,
-          border: '1.5px solid var(--ink-text)',
-          borderRadius: 0,
+          width: 44,
+          height: 22,
+          border: '1px solid var(--border-strong)',
+          borderRadius: 11,
           cursor: 'pointer',
-          transition: 'all 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
+          transition: 'all 0.25s cubic-bezier(0.22, 1, 0.36, 1)',
           '&:hover': {
-            transform: 'rotate(-1deg)',
             borderColor: 'var(--ink-primary)',
           },
         }}
       >
         <motion.div
           animate={{
-            x: isDark ? 26 : 0,
-            backgroundColor: isDark ? 'var(--ink-primary)' : 'var(--ink-secondary)',
+            x: isDark ? 22 : 0,
           }}
           transition={{
-            x: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
-            backgroundColor: { duration: 0.25 },
+            x: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
           }}
           style={{
             position: 'absolute',
-            top: 2,
-            left: 2,
-            width: 20,
-            height: 20,
+            top: 1,
+            left: 1,
+            width: 18,
+            height: 18,
+            borderRadius: '50%',
+            backgroundColor: 'var(--ink-primary)',
           }}
         />
         <Box
           sx={{
             position: 'absolute',
-            left: 4,
+            left: 5,
             top: '50%',
             transform: 'translateY(-50%)',
-            color: isDark ? 'var(--ink-text)' : 'var(--paper)',
-            opacity: isDark ? 0.4 : 1,
-            transition: 'opacity 0.3s ease',
+            color: isDark ? 'var(--ink-mute)' : 'var(--ink-text)',
             display: 'flex',
+            transition: 'color 0.25s ease',
           }}
         >
-          <LightModeIcon sx={{ fontSize: 14 }} />
+          <LightModeIcon sx={{ fontSize: 12 }} />
         </Box>
         <Box
           sx={{
             position: 'absolute',
-            right: 4,
+            right: 5,
             top: '50%',
             transform: 'translateY(-50%)',
-            color: isDark ? 'var(--paper)' : 'var(--ink-text)',
-            opacity: isDark ? 1 : 0.4,
-            transition: 'opacity 0.3s ease',
+            color: isDark ? 'var(--ink-text)' : 'var(--ink-mute)',
             display: 'flex',
+            transition: 'color 0.25s ease',
           }}
         >
-          <DarkModeIcon sx={{ fontSize: 14 }} />
+          <DarkModeIcon sx={{ fontSize: 12 }} />
         </Box>
       </Box>
     </Box>

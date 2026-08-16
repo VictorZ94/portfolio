@@ -1,31 +1,36 @@
-import { Box, Typography, Container, Button, Stack } from '@mui/material';
+import { Box, Typography, Container } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import SectionTitle from '../components/section-title';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { HandDrawnArrow } from '../components/HandDrawnArrow';
 
 interface ContactLink {
   icon: typeof EmailIcon;
   label: string;
+  value: string;
   href: string;
+  primary?: boolean;
 }
 
 const contactLinks: ContactLink[] = [
   {
     icon: EmailIcon,
     label: 'Email',
+    value: 'zrvictor00@gmail.com',
     href: 'mailto:zrvictor00@gmail.com',
+    primary: true,
   },
   {
     icon: LinkedInIcon,
     label: 'LinkedIn',
+    value: '/in/victor-zuluaga',
     href: 'https://linkedin.com',
   },
   {
     icon: GitHubIcon,
     label: 'GitHub',
+    value: '/victorz94',
     href: 'https://github.com/victorz94',
   },
 ];
@@ -40,59 +45,35 @@ export function Contact() {
       ref={ref}
       sx={{
         position: 'relative',
-        py: { xs: 12, md: 18 },
-        bgcolor: 'var(--paper-deep)',
+        py: { xs: 10, md: 14 },
+        bgcolor: 'var(--paper)',
+        borderTop: '1px solid var(--border)',
         overflow: 'hidden',
         scrollMarginTop: { xs: 64, sm: 0 },
       }}
     >
-      {/* Halftone bleed */}
+      {/* Single subtle radial */}
       <Box
         sx={{
           position: 'absolute',
-          top: '-15%',
-          right: '-10%',
+          top: '-10%',
+          left: '-15%',
           width: '60%',
-          height: '90%',
+          height: '80%',
           background:
-            'radial-gradient(ellipse 60% 50% at center, var(--ink-primary) 0%, transparent 60%)',
-          opacity: 0.2,
-          mixBlendMode: 'multiply',
-          pointerEvents: 'none',
-        }}
-      />
-      <Box
-        sx={{
-          position: 'absolute',
-          bottom: '-15%',
-          left: '-10%',
-          width: '50%',
-          height: '70%',
-          background:
-            'radial-gradient(ellipse 60% 50% at center, var(--ink-secondary) 0%, transparent 60%)',
-          opacity: 0.15,
-          mixBlendMode: 'multiply',
+            'radial-gradient(ellipse 60% 50% at center, var(--ink-primary-soft) 0%, transparent 70%)',
+          opacity: 0.5,
           pointerEvents: 'none',
         }}
       />
 
-      <Container maxWidth="md" sx={{ position: 'relative', zIndex: 2 }}>
-        <Box sx={{ mb: { xs: 6, md: 8 }, textAlign: 'center' }}>
-          <SectionTitle
-            text="Say hi"
-            index="— page 06 — the end?"
-            subtitle="let's build something"
-            ink="primary"
-          />
-        </Box>
-
+      <Container maxWidth="md" sx={{ position: 'relative' }}>
         <Box
           sx={{
-            textAlign: 'center',
             opacity: 0,
-            transform: 'translateY(20px)',
+            transform: 'translateY(8px)',
             transition:
-              'opacity 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s, transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s',
+              'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s',
             ...(isVisible && {
               opacity: 1,
               transform: 'translateY(0)',
@@ -101,148 +82,178 @@ export function Contact() {
         >
           <Typography
             sx={{
-              fontFamily: 'var(--font-display)',
-              fontWeight: 700,
-              fontSize: { xs: '2rem', md: '3.5rem' },
-              color: 'var(--ink-text)',
-              lineHeight: 1.05,
-              mb: 3,
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.7rem',
+              color: 'var(--ink-mute)',
+              letterSpacing: '0.15em',
               textTransform: 'uppercase',
-              letterSpacing: '-0.02em',
+              mb: 2,
             }}
           >
-            Open to{' '}
-            <Box component="span" sx={{ color: 'var(--ink-primary)' }}>
-              opportunities
-            </Box>{' '}
-            &{' '}
-            <Box component="span" sx={{ color: 'var(--ink-secondary)' }}>
-              collabs.
-            </Box>
+            06 — Contact
           </Typography>
 
-          <Box
+          <Typography
+            component="h2"
             sx={{
-              position: 'relative',
-              display: 'inline-block',
-              mb: 6,
+              fontFamily: 'var(--font-sans)',
+              fontSize: { xs: '2.25rem', md: '3rem' },
+              fontWeight: 600,
+              color: 'var(--ink-text)',
+              letterSpacing: '-0.025em',
+              lineHeight: 1.1,
+              mb: 2,
             }}
           >
-            <Typography
-              sx={{
-                fontFamily: 'var(--font-hand)',
-                fontSize: { xs: '1.5rem', md: '1.9rem' },
-                color: 'var(--ink-text-soft)',
-                transform: 'rotate(-2deg)',
-              }}
-            >
-              don't be a stranger —
-            </Typography>
-            <Box
-              sx={{
-                position: 'absolute',
-                right: -50,
-                bottom: -10,
-              }}
-            >
-              <HandDrawnArrow
-                width={60}
-                height={36}
-                color="var(--ink-primary)"
-                rotation={15}
-                delay={1.5}
-              />
-            </Box>
-          </Box>
+            Let's talk.
+          </Typography>
 
-          <Stack
-            direction={{ xs: 'column', sm: 'row' }}
-            spacing={2.5}
-            sx={{ justifyContent: 'center', alignItems: 'center', mb: 6 }}
+          <Typography
+            sx={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: '1.05rem',
+              color: 'var(--ink-soft)',
+              mb: 5,
+              maxWidth: 560,
+              lineHeight: 1.55,
+            }}
           >
-            {contactLinks.map(({ icon: Icon, label, href }, i) => (
-              <Box
-                key={label}
-                sx={{
-                  opacity: 0,
-                  transform: 'translateY(16px) rotate(-2deg)',
-                  transition: `opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${0.5 + i * 0.12}s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${0.5 + i * 0.12}s`,
-                  ...(isVisible && {
-                    opacity: 1,
-                    transform: 'translateY(0) rotate(0deg)',
-                  }),
-                }}
-              >
-                <Button
-                  href={href}
-                  target={href.startsWith('http') ? '_blank' : undefined}
-                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  startIcon={<Icon />}
-                  variant={i === 0 ? 'contained' : 'outlined'}
-                  sx={
-                    i === 0
-                      ? {
-                          bgcolor: 'var(--ink-primary)',
-                          color: 'var(--paper)',
-                          px: 3.5,
-                          py: 1.5,
-                          borderRadius: 0,
-                          fontSize: '0.85rem',
-                          border: '2px solid var(--ink-primary)',
-                          boxShadow: '4px 4px 0 var(--ink-text)',
-                          '&:hover': {
-                            bgcolor: 'var(--paper)',
-                            color: 'var(--ink-primary)',
-                            transform: 'translate(2px, 2px)',
-                            boxShadow: '2px 2px 0 var(--ink-text)',
-                          },
-                        }
-                      : {
-                          borderColor: 'var(--ink-text)',
-                          color: 'var(--ink-text)',
-                          px: 3.5,
-                          py: 1.5,
-                          borderRadius: 0,
-                          borderWidth: '2px',
-                          fontSize: '0.85rem',
-                          boxShadow: '4px 4px 0 var(--ink-secondary)',
-                          '&:hover': {
-                            borderColor: 'var(--ink-secondary)',
-                            color: 'var(--ink-secondary)',
-                            bgcolor: 'transparent',
-                            borderWidth: '2px',
-                            transform: 'translate(2px, 2px)',
-                            boxShadow: '2px 2px 0 var(--ink-secondary)',
-                          },
-                        }
-                  }
+            Open to senior full-stack roles, contract work, and technical
+            consulting. The fastest way to reach me is email.
+          </Typography>
+        </Box>
+
+        {/* Contact list */}
+        <Box
+          sx={{
+            borderTop: '1px solid var(--border)',
+            opacity: 0,
+            transform: 'translateY(8px)',
+            transition:
+              'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.25s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.25s',
+            ...(isVisible && {
+              opacity: 1,
+              transform: 'translateY(0)',
+            }),
+          }}
+        >
+          {contactLinks.map(({ icon: Icon, label, value, href, primary }) => (
+            <Box
+              key={label}
+              component="a"
+              href={href}
+              target={href.startsWith('http') ? '_blank' : undefined}
+              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', md: '160px 1fr auto' },
+                gap: { xs: 0.5, md: 4 },
+                alignItems: 'center',
+                py: 3,
+                borderBottom: '1px solid var(--border)',
+                textDecoration: 'none',
+                color: 'var(--ink-text)',
+                transition: 'all 0.2s ease',
+                '&:hover': {
+                  bgcolor: 'var(--paper-2)',
+                  px: 2,
+                  mx: -2,
+                  borderRadius: 1,
+                  '& .contact-value': {
+                    color: 'var(--ink-primary)',
+                  },
+                  '& .contact-arrow': {
+                    transform: 'translate(2px, -2px)',
+                    color: 'var(--ink-primary)',
+                  },
+                },
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Icon
+                  sx={{
+                    fontSize: 18,
+                    color: primary ? 'var(--ink-primary)' : 'var(--ink-mute)',
+                  }}
+                />
+                <Typography
+                  sx={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '0.9rem',
+                    fontWeight: 600,
+                    color: 'var(--ink-text)',
+                    letterSpacing: '-0.005em',
+                  }}
                 >
                   {label}
-                </Button>
+                </Typography>
               </Box>
-            ))}
-          </Stack>
+              <Typography
+                className="contact-value"
+                sx={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.88rem',
+                  color: 'var(--ink-soft)',
+                  letterSpacing: '0.01em',
+                  transition: 'color 0.2s ease',
+                }}
+              >
+                {value}
+              </Typography>
+              <ArrowOutwardIcon
+                className="contact-arrow"
+                sx={{
+                  fontSize: 16,
+                  color: 'var(--ink-mute)',
+                  transition: 'all 0.2s ease',
+                  display: { xs: 'none', md: 'block' },
+                }}
+              />
+            </Box>
+          ))}
+        </Box>
 
-          {/* Hand-signed footer */}
-          <Box
+        {/* Footer */}
+        <Box
+          sx={{
+            mt: 8,
+            pt: 4,
+            borderTop: '1px solid var(--border)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: 2,
+            opacity: 0,
+            transform: 'translateY(8px)',
+            transition:
+              'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s',
+            ...(isVisible && {
+              opacity: 1,
+              transform: 'translateY(0)',
+            }),
+          }}
+        >
+          <Typography
             sx={{
-              mt: 6,
-              pt: 4,
-              borderTop: '2px dashed var(--ink-text-mute)',
-              display: 'inline-block',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.72rem',
+              color: 'var(--ink-mute)',
+              letterSpacing: '0.05em',
             }}
           >
-            <Typography
-              sx={{
-                fontFamily: 'var(--font-hand)',
-                fontSize: '1.5rem',
-                color: 'var(--ink-text-soft)',
-                transform: 'rotate(-3deg)',
-              }}
-            >
-              — victor z.
-            </Typography>
-          </Box>
+            © 2026 Victor Zuluaga
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.72rem',
+              color: 'var(--ink-mute)',
+              letterSpacing: '0.05em',
+            }}
+          >
+            Built with React, TypeScript & Vite
+          </Typography>
         </Box>
       </Container>
     </Box>

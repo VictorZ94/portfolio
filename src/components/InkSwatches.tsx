@@ -13,17 +13,16 @@ export function InkSwatches() {
         sx={{
           fontFamily: 'var(--font-mono)',
           fontSize: '0.65rem',
-          letterSpacing: '0.18em',
+          letterSpacing: '0.1em',
           textTransform: 'uppercase',
-          color: 'var(--ink-text)',
-          opacity: 0.55,
+          color: 'var(--ink-mute)',
           display: 'block',
           mb: 0.75,
         }}
       >
         ink
       </Box>
-      <Box sx={{ display: 'flex', gap: 0.75 }}>
+      <Box sx={{ display: 'flex', gap: 0.5 }}>
         {INK_OPTIONS.map((opt) => {
           const active = ink === opt.key;
           return (
@@ -35,22 +34,23 @@ export function InkSwatches() {
                 aria-pressed={active}
                 onClick={() => setInk(opt.key)}
                 sx={{
-                  width: 22,
-                  height: 22,
+                  width: 18,
+                  height: 18,
                   p: 0,
                   border: active
                     ? '1.5px solid var(--ink-text)'
-                    : '1.5px solid transparent',
+                    : '1.5px solid var(--border-strong)',
+                  borderRadius: '50%',
                   outline: 'none',
                   background: 'transparent',
                   cursor: 'pointer',
                   position: 'relative',
-                  transition: 'all 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
+                  transition: 'border-color 0.2s ease',
                   '&:hover': {
-                    transform: 'scale(1.18) rotate(-6deg)',
+                    borderColor: 'var(--ink-text)',
                   },
                   '&:focus-visible': {
-                    borderColor: 'var(--ink-secondary)',
+                    borderColor: 'var(--ink-primary)',
                   },
                 }}
               >
@@ -59,14 +59,13 @@ export function InkSwatches() {
                     display: 'block',
                     width: '100%',
                     height: '100%',
+                    borderRadius: '50%',
                     backgroundColor: active ? opt.light : opt.dark,
-                    mixBlendMode: 'multiply',
                   }}
                   animate={{
-                    scale: active ? 1 : 0.7,
-                    opacity: active ? 1 : 0.45,
+                    scale: active ? 1 : 0.55,
                   }}
-                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                 />
               </Box>
             </Tooltip>

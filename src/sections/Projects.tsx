@@ -1,36 +1,76 @@
-import { Box, Typography, Container, Stack } from '@mui/material';
+import { Box, Typography, Container, Chip, Stack, Button } from '@mui/material';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import SectionTitle from '../components/section-title';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { HandDrawnArrow } from '../components/HandDrawnArrow';
 
 interface Project {
+  num: string;
   title: string;
-  description: string;
-  technologies: string[];
-  ink: 'primary' | 'secondary';
+  subtitle: string;
+  problem: string;
+  built: string;
+  impact: string[];
+  stack: string[];
+  link?: { label: string; href: string };
+  featured?: boolean;
+  /** When true, only metadata is shown so Victor can fill in real content later */
+  placeholder?: boolean;
 }
 
 const projects: Project[] = [
   {
+    num: '01',
     title: 'E-Commerce Platform',
-    description:
-      'A full-featured e-commerce platform with real-time inventory management, payment processing, and admin dashboard.',
-    technologies: ['React', 'Node.js', 'PostgreSQL', 'Stripe'],
-    ink: 'primary',
+    subtitle:
+      'Real-time inventory, payment processing, and admin tooling for a multi-tenant storefront.',
+    problem:
+      'The legacy monolith could not handle peak traffic; checkout failures during sales events damaged revenue and customer trust.',
+    built:
+      'Led the migration to an event-driven architecture using a queue-based order pipeline. Replaced synchronous billing calls with idempotent, retryable workers and added observability across every stage.',
+    impact: [
+      '99.7% reduction in checkout errors during peak events',
+      'Order processing time cut from 2 hours to under 5 minutes',
+      'p99 API latency for product search improved by 40% via cache layer',
+    ],
+    stack: ['Next.js', 'Node.js', 'PostgreSQL', 'Redis', 'Stripe'],
+    link: { label: 'Case study', href: '#' },
+    featured: true,
   },
   {
-    title: 'Analytics Dashboard',
-    description:
-      'Real-time data visualization dashboard for monitoring application metrics and user behavior with interactive charts.',
-    technologies: ['React', 'D3.js', 'TypeScript', 'WebSocket'],
-    ink: 'secondary',
+    num: '02',
+    title: 'TODO — Analytics Dashboard',
+    subtitle:
+      '// TODO: Replace with a real project. Describe what it is in one sentence.',
+    problem:
+      '// TODO: What gap or pain point did this project solve? Be specific about the problem.',
+    built:
+      '// TODO: What did you build? Highlight architecture decisions, scale challenges, ownership.',
+    impact: [
+      '// TODO: measurable impact #1 (with a number)',
+      '// TODO: measurable impact #2 (with a number)',
+      '// TODO: measurable impact #3 (with a number)',
+    ],
+    stack: ['React', 'D3.js', 'TypeScript', 'WebSocket'],
+    link: { label: 'Case study', href: '#' },
+    placeholder: true,
   },
   {
-    title: 'Headless CMS',
-    description:
-      'API-first CMS with multiple content types, flexible publishing workflows, and a custom editor experience.',
-    technologies: ['Node.js', 'GraphQL', 'MongoDB', 'Redis'],
-    ink: 'primary',
+    num: '03',
+    title: 'TODO — Headless CMS',
+    subtitle:
+      '// TODO: Replace with a real project. Describe what it is in one sentence.',
+    problem:
+      '// TODO: What gap or pain point did this project solve? Be specific about the problem.',
+    built:
+      '// TODO: What did you build? Highlight architecture decisions, scale challenges, ownership.',
+    impact: [
+      '// TODO: measurable impact #1 (with a number)',
+      '// TODO: measurable impact #2 (with a number)',
+      '// TODO: measurable impact #3 (with a number)',
+    ],
+    stack: ['Node.js', 'GraphQL', 'MongoDB', 'Redis'],
+    link: { label: 'Case study', href: '#' },
+    placeholder: true,
   },
 ];
 
@@ -42,15 +82,7 @@ function ProjectCard({
   index: number;
 }) {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
-  const inkColor =
-    project.ink === 'primary'
-      ? 'var(--ink-primary)'
-      : 'var(--ink-secondary)';
-  const shadowColor =
-    project.ink === 'primary'
-      ? 'var(--ink-secondary)'
-      : 'var(--ink-primary)';
-  const rotation = index % 2 === 0 ? -0.5 : 0.5;
+  const isPlaceholder = project.placeholder;
 
   return (
     <Box
@@ -58,124 +90,297 @@ function ProjectCard({
       sx={{
         position: 'relative',
         bgcolor: 'var(--paper)',
-        border: '2px solid var(--ink-text)',
-        p: { xs: 3, md: 4 },
+        border: '1px solid var(--border)',
+        borderRadius: 2,
+        p: { xs: 3, md: 5 },
         display: 'flex',
         flexDirection: 'column',
-        transform: `rotate(${rotation}deg)`,
         opacity: 0,
-        transition: `opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.15}s, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1)`,
-        boxShadow: `4px 4px 0 var(--ink-text)`,
+        transform: 'translateY(12px)',
+        transition: `opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.1}s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.1}s, border-color 0.2s ease`,
         '&:hover': {
-          transform: `rotate(0deg) translate(-2px, -2px)`,
-          boxShadow: `8px 8px 0 ${shadowColor}`,
-          '& .project-arrow-wrap': {
-            transform: 'translateX(4px) rotate(-3deg)',
-          },
+          borderColor: 'var(--ink-primary)',
         },
         ...(isVisible && {
           opacity: 1,
+          transform: 'translateY(0)',
         }),
       }}
     >
-      {/* Index + ink tab */}
+      {/* Header: number + stack */}
       <Box
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'flex-start',
+          alignItems: 'baseline',
           mb: 3,
+          pb: 2.5,
+          borderBottom: '1px solid var(--border)',
+          flexWrap: 'wrap',
+          gap: 2,
         }}
       >
-        <Box
-          sx={{
-            border: `2px solid ${inkColor}`,
-            px: 1,
-            py: 0.3,
-            transform: `rotate(${index % 2 === 0 ? -3 : 3}deg)`,
-          }}
-        >
+        <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1.5 }}>
           <Typography
             sx={{
-              fontFamily: 'var(--font-stamp)',
+              fontFamily: 'var(--font-mono)',
               fontSize: '0.75rem',
-              color: inkColor,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              lineHeight: 1,
+              color: 'var(--ink-mute)',
+              letterSpacing: '0.05em',
             }}
           >
-            № {String(index + 1).padStart(2, '0')}
+            № {project.num}
           </Typography>
+          {project.featured && (
+            <Box
+              sx={{
+                px: 1,
+                py: 0.25,
+                borderRadius: 1,
+                bgcolor: 'var(--ink-primary)',
+                color: 'var(--ink-primary-fg)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.65rem',
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase',
+                fontWeight: 600,
+              }}
+            >
+              Featured
+            </Box>
+          )}
+          {isPlaceholder && (
+            <Box
+              sx={{
+                px: 1,
+                py: 0.25,
+                borderRadius: 1,
+                border: '1px solid var(--border-strong)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.65rem',
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase',
+                fontWeight: 500,
+                color: 'var(--ink-mute)',
+              }}
+            >
+              TODO
+            </Box>
+          )}
         </Box>
-
-        <Box className="project-arrow-wrap" sx={{ transition: 'transform 0.4s ease' }}>
-          <HandDrawnArrow
-            width={50}
-            height={28}
-            color={inkColor}
-            rotation={-12}
-            delay={0.6 + index * 0.15}
-          />
-        </Box>
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.7rem',
+            color: 'var(--ink-mute)',
+            letterSpacing: '0.05em',
+            textAlign: 'right',
+          }}
+        >
+          {project.stack.join(' · ')}
+        </Typography>
       </Box>
 
+      {/* Title + subtitle */}
       <Typography
+        component="h3"
         sx={{
-          fontFamily: 'var(--font-display)',
-          fontSize: { xs: '1.5rem', md: '1.85rem' },
-          fontWeight: 700,
+          fontFamily: 'var(--font-sans)',
+          fontSize: { xs: '1.35rem', md: project.featured ? '1.85rem' : '1.4rem' },
+          fontWeight: 600,
           color: 'var(--ink-text)',
-          mb: 2,
-          lineHeight: 1.1,
-          textTransform: 'uppercase',
-          letterSpacing: '-0.01em',
+          mb: 1,
+          letterSpacing: '-0.015em',
+          lineHeight: 1.2,
         }}
       >
         {project.title}
       </Typography>
-
       <Typography
         sx={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: '0.9rem',
-          color: 'var(--ink-text-soft)',
-          mb: 3,
-          flexGrow: 1,
-          lineHeight: 1.7,
+          fontFamily: 'var(--font-sans)',
+          fontSize: '1rem',
+          color: 'var(--ink-soft)',
+          mb: 4,
+          lineHeight: 1.55,
+          maxWidth: 720,
         }}
       >
-        {project.description}
+        {project.subtitle}
       </Typography>
 
-      <Stack
-        direction="row"
-        sx={{ flexWrap: 'wrap', gap: 0.75, mt: 'auto' }}
+      {/* Problem / Built / Impact */}
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', md: '120px 1fr' },
+          gap: { xs: 0.5, md: 4 },
+          mb: 2,
+        }}
       >
-        {project.technologies.map((tech) => (
-          <Box
-            key={tech}
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.7rem',
+            color: 'var(--ink-mute)',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            pt: 0.25,
+          }}
+        >
+          Problem
+        </Typography>
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: '0.92rem',
+            color: 'var(--ink-soft)',
+            lineHeight: 1.65,
+          }}
+        >
+          {project.problem}
+        </Typography>
+      </Box>
+
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', md: '120px 1fr' },
+          gap: { xs: 0.5, md: 4 },
+          mb: 2,
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.7rem',
+            color: 'var(--ink-mute)',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            pt: 0.25,
+          }}
+        >
+          Built
+        </Typography>
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: '0.92rem',
+            color: 'var(--ink-soft)',
+            lineHeight: 1.65,
+          }}
+        >
+          {project.built}
+        </Typography>
+      </Box>
+
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', md: '120px 1fr' },
+          gap: { xs: 0.5, md: 4 },
+          mb: 4,
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.7rem',
+            color: 'var(--ink-mute)',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            pt: 0.25,
+          }}
+        >
+          Impact
+        </Typography>
+        <Box component="ul" sx={{ pl: 0, m: 0, listStyle: 'none' }}>
+          {project.impact.map((item) => (
+            <Box
+              key={item}
+              component="li"
+              sx={{
+                position: 'relative',
+                pl: 3,
+                mb: 1,
+                fontSize: '0.92rem',
+                color: 'var(--ink-soft)',
+                lineHeight: 1.6,
+                '&::before': {
+                  content: '"–"',
+                  position: 'absolute',
+                  left: 0,
+                  color: 'var(--ink-primary)',
+                  fontWeight: 600,
+                },
+                '&:last-child': { mb: 0 },
+              }}
+            >
+              {item}
+            </Box>
+          ))}
+        </Box>
+      </Box>
+
+      {/* Footer: stack chips + link */}
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mt: 'auto',
+          pt: 3,
+          borderTop: '1px solid var(--border)',
+          flexWrap: 'wrap',
+          gap: 2,
+        }}
+      >
+        <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 0.75 }}>
+          {project.stack.map((tech) => (
+            <Chip
+              key={tech}
+              label={tech}
+              size="small"
+              variant="outlined"
+              sx={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.7rem',
+                height: 24,
+                color: 'var(--ink-soft)',
+                borderColor: 'var(--border)',
+                backgroundColor: 'var(--paper-2)',
+                borderRadius: 1,
+              }}
+            />
+          ))}
+        </Stack>
+        {project.link && (
+          <Button
+            href={project.link.href}
+            endIcon={<ArrowOutwardIcon sx={{ fontSize: 14 }} />}
+            disabled={isPlaceholder}
             sx={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.7rem',
-              color: 'var(--ink-text-soft)',
-              border: '1.5px solid var(--ink-text)',
-              px: 1,
-              py: 0.3,
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              transition: 'all 0.3s ease',
+              color: 'var(--ink-text)',
+              fontFamily: 'var(--font-sans)',
+              fontSize: '0.8rem',
+              fontWeight: 500,
+              px: 1.5,
+              py: 0.5,
+              minWidth: 0,
               '&:hover': {
-                borderColor: inkColor,
-                color: inkColor,
-                transform: 'rotate(-2deg)',
+                bgcolor: 'transparent',
+                color: 'var(--ink-primary)',
+              },
+              '&.Mui-disabled': {
+                color: 'var(--ink-mute)',
+                opacity: 1,
               },
             }}
           >
-            {tech}
-          </Box>
-        ))}
-      </Stack>
+            {isPlaceholder ? 'Coming soon' : project.link.label}
+          </Button>
+        )}
+      </Box>
     </Box>
   );
 }
@@ -187,26 +392,25 @@ export function Projects() {
       component="section"
       sx={{
         position: 'relative',
-        py: { xs: 10, md: 16 },
+        py: { xs: 10, md: 14 },
         bgcolor: 'var(--paper)',
+        borderTop: '1px solid var(--border)',
         scrollMarginTop: { xs: 64, sm: 0 },
       }}
     >
       <Container maxWidth="lg">
-        <Box sx={{ mb: { xs: 6, md: 10 } }}>
-          <SectionTitle
-            text="Projects"
-            index="— page 04 —"
-            subtitle="things I've shipped"
-          />
-        </Box>
+        <SectionTitle
+          text="Selected work"
+          eyebrow="03 — Projects"
+          subtitle="Real production systems. Each entry shows the problem, what was built, and the measurable impact."
+        />
 
-        {/* Asymmetric grid */}
         <Box
           sx={{
             display: 'grid',
             gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
-            gap: { xs: 4, md: 6 },
+            gridTemplateRows: { md: 'auto auto' },
+            gap: { xs: 3, md: 4 },
           }}
         >
           <Box sx={{ gridColumn: { md: 'span 2' } }}>

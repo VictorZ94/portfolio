@@ -1,4 +1,4 @@
-import { Box, Typography, Container, Stack } from '@mui/material';
+import { Box, Typography, Container } from '@mui/material';
 import SectionTitle from '../components/section-title';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -6,6 +6,7 @@ interface Job {
   company: string;
   role: string;
   period: string;
+  location?: string;
   achievements: string[];
 }
 
@@ -13,11 +14,11 @@ const jobs: Job[] = [
   {
     company: 'Tech Company Inc.',
     role: 'Senior Full-Stack Engineer',
-    period: '2022 — present',
+    period: '2022 — Present',
     achievements: [
-      'Led architecture redesign of core platform, improving performance by 40%',
-      'Mentored team of 3 junior engineers and established coding standards',
-      'Reduced deployment time from 2 hours to 15 minutes through CI/CD optimization',
+      'Led frontend architecture redesign of core platform, reducing page load time by 40% and improving Core Web Vitals across 12 product surfaces.',
+      'Migrated 200k-LOC legacy billing system from cron-based jobs to event-driven architecture, cutting processing time from 2 hours to under 5 minutes and eliminating race conditions.',
+      'Established frontend coding standards and design system used by a team of 5 engineers; reduced PR review time by 35%.',
     ],
   },
   {
@@ -25,9 +26,9 @@ const jobs: Job[] = [
     role: 'Full-Stack Developer',
     period: '2020 — 2022',
     achievements: [
-      'Built and maintained multiple production React applications serving 100k+ users',
-      'Implemented real-time features using WebSockets and GraphQL subscriptions',
-      'Improved test coverage from 45% to 85% through strategic testing initiatives',
+      'Built and maintained 4 production React applications serving 100k+ monthly active users, including a real-time analytics dashboard.',
+      'Designed and shipped a GraphQL API gateway that consolidated 7 legacy REST endpoints, reducing client-side request volume by 60%.',
+      'Drove test coverage from 45% to 85% across the product surface by introducing React Testing Library, integration tests, and CI gates.',
     ],
   },
   {
@@ -35,44 +36,11 @@ const jobs: Job[] = [
     role: 'Junior Developer',
     period: '2018 — 2020',
     achievements: [
-      'Developed responsive web applications using React and Node.js',
-      'Contributed to database optimization resulting in 30% query performance improvement',
-      'Participated in agile development cycles and daily standups',
+      'Shipped 6 customer-facing features across the React + Node.js stack in a fast-paced agile environment.',
+      'Optimized Postgres query patterns for the user search feature, reducing p95 query time from 800ms to 180ms.',
     ],
   },
 ];
-
-function Stamp({ text, rotate }: { text: string; rotate: number }) {
-  return (
-    <Box
-      sx={{
-        display: 'inline-block',
-        border: '2px solid var(--ink-primary)',
-        px: 1.5,
-        py: 0.5,
-        transform: `rotate(${rotate}deg)`,
-        transition: 'transform 0.3s ease',
-        '&:hover': {
-          transform: `rotate(${rotate}deg) scale(1.05)`,
-        },
-      }}
-    >
-      <Typography
-        sx={{
-          fontFamily: 'var(--font-stamp)',
-          fontSize: '0.85rem',
-          color: 'var(--ink-primary)',
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          lineHeight: 1,
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {text}
-      </Typography>
-    </Box>
-  );
-}
 
 function TimelineEntry({
   job,
@@ -84,7 +52,6 @@ function TimelineEntry({
   isLast: boolean;
 }) {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
-  const rotation = index % 2 === 0 ? -2 : 2;
 
   return (
     <Box
@@ -92,91 +59,75 @@ function TimelineEntry({
       sx={{
         position: 'relative',
         display: 'grid',
-        gridTemplateColumns: { xs: '60px 1fr', md: '120px 60px 1fr' },
-        gap: { xs: 2, md: 4 },
-        pb: isLast ? 0 : { xs: 6, md: 8 },
+        gridTemplateColumns: { xs: '1fr', md: '200px 1fr' },
+        gap: { xs: 1.5, md: 8 },
+        pb: isLast ? 0 : { xs: 6, md: 10 },
         opacity: 0,
-        transform: 'translateY(24px)',
-        transition: `opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.15}s, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.15}s`,
+        transform: 'translateY(8px)',
+        transition: `opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.1}s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.1}s`,
         ...(isVisible && {
           opacity: 1,
           transform: 'translateY(0)',
         }),
       }}
     >
-      {/* Period (left column) */}
+      {/* Left: period + company */}
       <Box>
         <Typography
           sx={{
-            fontFamily: 'var(--font-stamp)',
-            fontSize: '0.95rem',
-            color: 'var(--ink-primary)',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.75rem',
+            color: 'var(--ink-mute)',
             letterSpacing: '0.05em',
-            textTransform: 'uppercase',
-            transform: `rotate(${rotation}deg)`,
-            display: 'inline-block',
-            transformOrigin: 'left center',
+            mb: 1,
           }}
         >
           {job.period}
         </Typography>
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: '0.9rem',
+            color: 'var(--ink-soft)',
+            fontWeight: 500,
+          }}
+        >
+          {job.company}
+        </Typography>
       </Box>
 
-      {/* Center dot */}
+      {/* Right: role + achievements */}
       <Box
         sx={{
           position: 'relative',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        {!isLast && (
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 8,
-              bottom: -32,
-              width: 2,
-              borderLeft: '2px dashed var(--ink-text-mute)',
-            }}
-          />
-        )}
-        <Box
-          sx={{
-            position: 'relative',
-            width: 18,
-            height: 18,
+          pl: { md: 4 },
+          borderLeft: { md: '1px solid var(--border)' },
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            left: -4,
+            top: 8,
+            width: 7,
+            height: 7,
             borderRadius: '50%',
             backgroundColor: 'var(--paper)',
-            border: '3px solid var(--ink-primary)',
-            mt: 0.5,
-            transition: 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
-            ...(isVisible && {
-              backgroundColor: 'var(--ink-primary)',
-            }),
-            '&:hover': {
-              transform: 'scale(1.3) rotate(45deg)',
-            },
-          }}
-        />
-      </Box>
-
-      {/* Content */}
-      <Box>
-        <Box sx={{ mb: 2 }}>
-          <Stamp text={job.role} rotate={rotation} />
-        </Box>
+            border: '1.5px solid var(--ink-primary)',
+            display: { xs: 'none', md: 'block' },
+          },
+        }}
+      >
         <Typography
+          component="h3"
           sx={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.85rem',
-            color: 'var(--ink-text-mute)',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
+            fontFamily: 'var(--font-sans)',
+            fontSize: '1.15rem',
+            fontWeight: 600,
+            color: 'var(--ink-text)',
             mb: 2,
+            letterSpacing: '-0.01em',
           }}
         >
-          @ {job.company}
+          {job.role}
         </Typography>
         <Box component="ul" sx={{ pl: 0, m: 0, listStyle: 'none' }}>
           {job.achievements.map((achievement) => (
@@ -186,18 +137,16 @@ function TimelineEntry({
               sx={{
                 position: 'relative',
                 pl: 3,
-                mb: 1.2,
-                fontSize: '0.9rem',
-                color: 'var(--ink-text-soft)',
+                mb: 1.5,
+                fontSize: '0.92rem',
+                color: 'var(--ink-soft)',
                 lineHeight: 1.65,
-                fontFamily: 'var(--font-mono)',
+                fontFamily: 'var(--font-sans)',
                 '&::before': {
-                  content: '"→"',
+                  content: '"–"',
                   position: 'absolute',
                   left: 0,
-                  color: 'var(--ink-primary)',
-                  fontFamily: 'var(--font-stamp)',
-                  fontWeight: 700,
+                  color: 'var(--ink-mute)',
                 },
                 '&:last-child': { mb: 0 },
               }}
@@ -218,23 +167,20 @@ export function Experience() {
       component="section"
       sx={{
         position: 'relative',
-        py: { xs: 10, md: 16 },
-        bgcolor: 'var(--paper-deep)',
+        py: { xs: 10, md: 14 },
+        bgcolor: 'var(--paper)',
+        borderTop: '1px solid var(--border)',
         scrollMarginTop: { xs: 64, sm: 0 },
-        backgroundImage:
-          'radial-gradient(circle, rgba(31,58,138,0.05) 1px, transparent 1.5px)',
-        backgroundSize: '24px 24px',
       }}
     >
       <Container maxWidth="lg">
-        <Box sx={{ mb: { xs: 6, md: 10 } }}>
-          <SectionTitle
-            text="Experience"
-            index="— page 03 —"
-            subtitle="the road so far"
-          />
-        </Box>
-        <Stack spacing={0}>
+        <SectionTitle
+          text="Experience"
+          eyebrow="02 — Experience"
+          subtitle="Senior IC with 6+ years shipping production systems across frontend and backend."
+        />
+
+        <Box>
           {jobs.map((job, i) => (
             <TimelineEntry
               key={job.company}
@@ -243,7 +189,7 @@ export function Experience() {
               isLast={i === jobs.length - 1}
             />
           ))}
-        </Stack>
+        </Box>
       </Container>
     </Box>
   );

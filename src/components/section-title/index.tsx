@@ -1,86 +1,69 @@
 import { Box, Typography } from '@mui/material';
-import { SquiggleUnderline } from '../SquiggleUnderline';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 
 interface SectionTitleProps {
   text: string;
-  index?: string;
+  eyebrow?: string;
   subtitle?: string;
-  ink?: 'primary' | 'secondary';
 }
 
-const SectionTitle = ({
-  text,
-  index,
-  subtitle,
-  ink = 'primary',
-}: SectionTitleProps) => {
+const SectionTitle = ({ text, eyebrow, subtitle }: SectionTitleProps) => {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
-  const color =
-    ink === 'primary' ? 'var(--ink-primary)' : 'var(--ink-secondary)';
 
   return (
     <Box
       ref={ref}
       sx={{
         position: 'relative',
-        display: 'inline-block',
-        mb: 5,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 1.5,
+        mb: 6,
         opacity: 0,
-        transform: 'translateY(24px) rotate(-1deg)',
+        transform: 'translateY(12px)',
         transition:
-          'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)',
+          'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)',
         ...(isVisible && {
           opacity: 1,
-          transform: 'translateY(0) rotate(0deg)',
+          transform: 'translateY(0)',
         }),
       }}
     >
-      {index && (
+      {eyebrow && (
         <Typography
           sx={{
-            fontFamily: 'var(--font-stamp)',
-            fontSize: '0.95rem',
-            color: 'var(--ink-text-mute)',
-            mb: 1.5,
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.7rem',
+            color: 'var(--ink-mute)',
             letterSpacing: '0.15em',
             textTransform: 'uppercase',
           }}
         >
-          {index}
+          {eyebrow}
         </Typography>
       )}
       <Typography
         component="h2"
         sx={{
-          fontFamily: 'var(--font-display)',
-          fontSize: { xs: '3rem', md: '5rem' },
-          fontWeight: 700,
+          fontFamily: 'var(--font-sans)',
+          fontSize: { xs: '2rem', md: '2.75rem' },
+          fontWeight: 600,
           color: 'var(--ink-text)',
-          letterSpacing: '-0.01em',
-          lineHeight: 0.95,
-          mb: 1,
-          textTransform: 'uppercase',
+          letterSpacing: '-0.02em',
+          lineHeight: 1.1,
         }}
       >
         {text}
       </Typography>
-      <Box sx={{ position: 'relative', height: 14 }}>
-        <SquiggleUnderline
-          width={Math.max(160, text.length * 22)}
-          height={14}
-          color={color}
-          delay={0.4}
-        />
-      </Box>
       {subtitle && (
         <Typography
           sx={{
-            fontFamily: 'var(--font-hand)',
-            fontSize: '1.4rem',
-            color: 'var(--ink-text-mute)',
-            mt: 2,
-            transform: 'rotate(-2deg)',
+            fontFamily: 'var(--font-sans)',
+            fontSize: '1.05rem',
+            color: 'var(--ink-soft)',
+            maxWidth: 640,
+            lineHeight: 1.55,
+            mt: 0.5,
           }}
         >
           {subtitle}

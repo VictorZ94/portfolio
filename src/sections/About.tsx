@@ -1,7 +1,6 @@
 import { Box, Typography, Container } from '@mui/material';
 import SectionTitle from '../components/section-title';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { HandDrawnArrow } from '../components/HandDrawnArrow';
 
 export function About() {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
@@ -12,66 +11,65 @@ export function About() {
       component="section"
       sx={{
         position: 'relative',
-        py: { xs: 10, md: 16 },
+        py: { xs: 10, md: 14 },
         bgcolor: 'var(--paper)',
+        borderTop: '1px solid var(--border)',
         scrollMarginTop: { xs: 64, sm: 0 },
       }}
     >
       <Container maxWidth="lg">
         <Box ref={ref}>
-          <Box sx={{ mb: { xs: 6, md: 10 } }}>
-            <SectionTitle
-              text="About"
-              index="— page 02 —"
-              subtitle="about the human behind the keyboard"
-            />
-          </Box>
+          <SectionTitle
+            text="About"
+            eyebrow="01 — About"
+            subtitle="Senior engineer with deep frontend expertise and full-stack range."
+          />
 
           <Box
             sx={{
               display: 'grid',
-              gridTemplateColumns: { xs: '1fr', md: '1.5fr 1fr' },
-              gap: { xs: 4, md: 8 },
-              alignItems: 'start',
+              gridTemplateColumns: { xs: '1fr', md: '1.4fr 1fr' },
+              gap: { xs: 5, md: 10 },
+              mt: 2,
             }}
           >
-            {/* Main text */}
+            {/* Left: main statement */}
             <Box>
               <Box
                 sx={{
                   opacity: 0,
-                  transform: 'translateY(20px) rotate(-0.5deg)',
+                  transform: 'translateY(8px)',
                   transition:
-                    'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s',
+                    'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s',
                   ...(isVisible && {
                     opacity: 1,
-                    transform: 'translateY(0) rotate(0deg)',
+                    transform: 'translateY(0)',
                   }),
                 }}
               >
                 <Typography
                   sx={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: { xs: '1.5rem', md: '2rem' },
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: { xs: '1.35rem', md: '1.65rem' },
                     color: 'var(--ink-text)',
-                    lineHeight: 1.25,
-                    mb: 4,
-                    fontWeight: 700,
-                    textTransform: 'uppercase',
-                    letterSpacing: '-0.01em',
+                    lineHeight: 1.4,
+                    mb: 3,
+                    fontWeight: 500,
+                    letterSpacing: '-0.015em',
                   }}
                 >
-                  I'm a Frontend Engineer specialised in React and Next.js —
-                  building modern, scalable, product-focused web apps.
+                  I lead frontend architecture on production web products,
+                  taking ownership from system design through to deployment
+                  and observability.
                 </Typography>
               </Box>
 
               <Box
                 sx={{
                   opacity: 0,
-                  transform: 'translateY(20px)',
+                  transform: 'translateY(8px)',
                   transition:
-                    'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s',
+                    'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s',
                   ...(isVisible && {
                     opacity: 1,
                     transform: 'translateY(0)',
@@ -80,164 +78,119 @@ export function About() {
               >
                 <Typography
                   sx={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.95rem',
-                    color: 'var(--ink-text-soft)',
-                    lineHeight: 1.8,
-                    mb: 4,
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '1rem',
+                    color: 'var(--ink-soft)',
+                    lineHeight: 1.7,
+                    mb: 3,
                   }}
                 >
-                  I focus on turning complex requirements and designs into
-                  clear, efficient, and maintainable user interfaces, with
-                  strong attention to user experience and code quality. I've
-                  worked on real-world production products, taking ownership
-                  of complete features — from frontend implementation to API
-                  integrations and authentication flows.
+                  I've shipped real-world products at scale — leading
+                  architecture migrations, designing systems that handle
+                  production traffic, and mentoring engineers. My work spans
+                  the full stack: from frontend interfaces and design
+                  systems, through API design and authentication, to the
+                  deployment and observability layers underneath.
                 </Typography>
               </Box>
 
-              {/* Skills list as a "legend" */}
+              {/* Skills matrix */}
               <Box
                 sx={{
+                  mt: 5,
                   pt: 4,
-                  borderTop: '1.5px dashed var(--ink-text-mute)',
+                  borderTop: '1px solid var(--border)',
+                  display: 'grid',
+                  gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
+                  gap: 3,
                   opacity: 0,
-                  transform: 'translateY(20px)',
+                  transform: 'translateY(8px)',
                   transition:
-                    'opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.45s, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.45s',
+                    'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s',
                   ...(isVisible && {
                     opacity: 1,
                     transform: 'translateY(0)',
                   }),
                 }}
               >
-                <Typography
-                  sx={{
-                    fontFamily: 'var(--font-stamp)',
-                    fontSize: '0.85rem',
-                    color: 'var(--ink-primary)',
-                    letterSpacing: '0.2em',
-                    mb: 2.5,
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  ~ legend ~
-                </Typography>
-                <Box sx={{ display: 'grid', gap: 1.2 }}>
-                  <Typography sx={{ fontSize: '0.9rem' }}>
-                    <Box
-                      component="span"
+                {[
+                  { label: 'Languages', value: 'JavaScript, TypeScript, Python' },
+                  { label: 'Frameworks', value: 'React, Next.js, Node.js, Nest.js' },
+                  { label: 'Backend', value: 'FastAPI, Django, GraphQL, REST' },
+                  { label: 'Infrastructure', value: 'AWS, GCP, Docker, Vercel, CI/CD' },
+                ].map((row) => (
+                  <Box key={row.label}>
+                    <Typography
                       sx={{
-                        fontFamily: 'var(--font-stamp)',
-                        color: 'var(--ink-secondary)',
-                        fontSize: '0.75rem',
-                        mr: 1.5,
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.7rem',
+                        color: 'var(--ink-mute)',
                         letterSpacing: '0.1em',
-                        minWidth: 70,
-                        display: 'inline-block',
+                        textTransform: 'uppercase',
+                        mb: 0.75,
                       }}
                     >
-                      LANG
-                    </Box>
-                    JavaScript, TypeScript, Python
-                  </Typography>
-                  <Typography sx={{ fontSize: '0.9rem' }}>
-                    <Box
-                      component="span"
+                      {row.label}
+                    </Typography>
+                    <Typography
                       sx={{
-                        fontFamily: 'var(--font-stamp)',
-                        color: 'var(--ink-secondary)',
-                        fontSize: '0.75rem',
-                        mr: 1.5,
-                        letterSpacing: '0.1em',
-                        minWidth: 70,
-                        display: 'inline-block',
+                        fontFamily: 'var(--font-sans)',
+                        fontSize: '0.9rem',
+                        color: 'var(--ink-text)',
+                        lineHeight: 1.55,
                       }}
                     >
-                      FRAME
-                    </Box>
-                    React, Next.js, Node.js, Nest.js, Django, FastAPI
-                  </Typography>
-                  <Typography sx={{ fontSize: '0.9rem' }}>
-                    <Box
-                      component="span"
-                      sx={{
-                        fontFamily: 'var(--font-stamp)',
-                        color: 'var(--ink-secondary)',
-                        fontSize: '0.75rem',
-                        mr: 1.5,
-                        letterSpacing: '0.1em',
-                        minWidth: 70,
-                        display: 'inline-block',
-                      }}
-                    >
-                      TOOLS
-                    </Box>
-                    Git, Docker, AWS, Vercel, GCP
-                  </Typography>
-                </Box>
+                      {row.value}
+                    </Typography>
+                  </Box>
+                ))}
               </Box>
             </Box>
 
-            {/* Pull quote — cut-and-paste feel */}
+            {/* Right: pull-quote */}
             <Box
               sx={{
                 position: { md: 'sticky' },
                 top: { md: 100 },
                 opacity: 0,
-                transform: 'translateY(20px) rotate(-3deg)',
+                transform: 'translateY(8px)',
                 transition:
-                  'opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s, transform 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s',
+                  'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s',
                 ...(isVisible && {
                   opacity: 1,
-                  transform: 'translateY(0) rotate(-2deg)',
+                  transform: 'translateY(0)',
                 }),
               }}
             >
               <Box
                 sx={{
-                  border: '2px solid var(--ink-primary)',
-                  p: 3,
-                  bgcolor: 'var(--paper)',
-                  boxShadow: '6px 6px 0 var(--ink-secondary)',
-                  position: 'relative',
+                  borderTop: '1px solid var(--border-strong)',
+                  borderBottom: '1px solid var(--border-strong)',
+                  py: 4,
                 }}
               >
                 <Typography
                   sx={{
-                    fontFamily: 'var(--font-stamp)',
-                    fontSize: '1.1rem',
-                    color: 'var(--ink-primary)',
-                    mb: 1.5,
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
+                    fontFamily: 'var(--font-serif)',
+                    fontStyle: 'italic',
+                    fontSize: { xs: '1.6rem', md: '1.9rem' },
+                    color: 'var(--ink-text)',
+                    lineHeight: 1.35,
+                    mb: 2,
                   }}
                 >
-                  ★ design note
+                  "Where the eye stops, the design begins."
                 </Typography>
                 <Typography
                   sx={{
-                    fontFamily: 'var(--font-hand)',
-                    fontSize: '1.7rem',
-                    color: 'var(--ink-text)',
-                    lineHeight: 1.3,
-                    fontWeight: 600,
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.72rem',
+                    color: 'var(--ink-mute)',
+                    letterSpacing: '0.05em',
                   }}
                 >
-                  where the eye stops,
-                  <br />
-                  the design begins.
+                  — design principle
                 </Typography>
-                <Box sx={{ position: 'absolute', bottom: -16, right: -10 }}>
-                  <HandDrawnArrow
-                    width={60}
-                    height={36}
-                    color="var(--ink-secondary)"
-                    rotation={20}
-                    flip
-                    delay={1.5}
-                  />
-                </Box>
               </Box>
             </Box>
           </Box>

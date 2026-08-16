@@ -2,49 +2,59 @@ import { createTheme } from '@mui/material/styles';
 
 export const theme = createTheme({
   typography: {
-    fontFamily: '"Fragment Mono", "Courier New", ui-monospace, monospace',
+    fontFamily:
+      '"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif',
     h1: {
-      fontFamily: '"Boldonse", "Arial Black", system-ui, sans-serif',
-      fontWeight: 700,
-      letterSpacing: '-0.02em',
+      fontFamily:
+        '"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif',
+      fontWeight: 600,
+      letterSpacing: '-0.03em',
     },
     h2: {
-      fontFamily: '"Boldonse", "Arial Black", system-ui, sans-serif',
-      fontWeight: 700,
-      letterSpacing: '0.01em',
+      fontFamily:
+        '"Geist", ui-sans-serif, system-ui, system-ui, sans-serif',
+      fontWeight: 600,
+      letterSpacing: '-0.02em',
     },
     h3: {
-      fontFamily: '"Boldonse", "Arial Black", system-ui, sans-serif',
+      fontFamily:
+        '"Geist", ui-sans-serif, system-ui, sans-serif',
       fontWeight: 600,
-      letterSpacing: '0.01em',
+      letterSpacing: '-0.015em',
     },
     h4: {
-      fontFamily: '"Boldonse", "Arial Black", system-ui, sans-serif',
+      fontFamily:
+        '"Geist", ui-sans-serif, system-ui, sans-serif',
       fontWeight: 600,
     },
     h5: {
-      fontFamily: '"Fragment Mono", "Courier New", monospace',
+      fontFamily:
+        '"Geist", ui-sans-serif, system-ui, sans-serif',
       fontWeight: 600,
     },
     h6: {
-      fontFamily: '"Fragment Mono", "Courier New", monospace',
+      fontFamily:
+        '"Geist", ui-sans-serif, system-ui, sans-serif',
       fontWeight: 600,
     },
     body1: {
-      fontFamily: '"Fragment Mono", "Courier New", monospace',
+      fontFamily:
+        '"Geist", ui-sans-serif, system-ui, sans-serif',
     },
     body2: {
-      fontFamily: '"Fragment Mono", "Courier New", monospace',
+      fontFamily:
+        '"Geist", ui-sans-serif, system-ui, sans-serif',
     },
     button: {
-      fontFamily: '"Boldonse", "Arial Black", system-ui, sans-serif',
-      fontWeight: 600,
-      letterSpacing: '0.08em',
-      textTransform: 'uppercase',
+      fontFamily:
+        '"Geist", ui-sans-serif, system-ui, sans-serif',
+      fontWeight: 500,
+      letterSpacing: '-0.005em',
+      textTransform: 'none',
     },
   },
   shape: {
-    borderRadius: 0,
+    borderRadius: 6,
   },
   components: {
     MuiCssBaseline: {
@@ -57,13 +67,19 @@ export const theme = createTheme({
     MuiButton: {
       defaultProps: {
         disableElevation: true,
-        disableRipple: false,
       },
       styleOverrides: {
         root: {
-          borderRadius: 0,
-          textTransform: 'uppercase',
-          transition: 'all 0.35s cubic-bezier(0.22, 1, 0.36, 1)',
+          borderRadius: 6,
+          textTransform: 'none',
+          transition: 'all 0.2s cubic-bezier(0.22, 1, 0.36, 1)',
+          fontWeight: 500,
+        },
+        contained: {
+          boxShadow: 'none',
+          '&:hover': {
+            boxShadow: 'none',
+          },
         },
       },
     },
@@ -77,29 +93,31 @@ export const theme = createTheme({
     MuiChip: {
       styleOverrides: {
         root: {
-          borderRadius: 0,
+          borderRadius: 4,
         },
       },
     },
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
-          borderRadius: 0,
-          backgroundColor: '#0a0a0a',
-          fontFamily: '"Fragment Mono", "Courier New", monospace',
+          borderRadius: 4,
+          backgroundColor: '#18181b',
+          fontFamily:
+            '"Geist", ui-sans-serif, system-ui, sans-serif',
           fontSize: '0.7rem',
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
+          letterSpacing: '0.01em',
+          textTransform: 'none',
+          padding: '6px 8px',
         },
         arrow: {
-          color: '#0a0a0a',
+          color: '#18181b',
         },
       },
     },
     MuiIconButton: {
       styleOverrides: {
         root: {
-          borderRadius: 0,
+          borderRadius: 6,
         },
       },
     },
