@@ -3,12 +3,52 @@ import { useScrollReveal } from '../../hooks/useScrollReveal';
 
 interface SectionTitleProps {
   text: string;
-  eyebrow?: string;
-  subtitle?: string;
+  band?: boolean;
 }
 
-const SectionTitle = ({ text, eyebrow, subtitle }: SectionTitleProps) => {
+const SectionTitle = ({ text, band = false }: SectionTitleProps) => {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
+
+  if (band) {
+    return (
+      <Box
+        ref={ref}
+        sx={{
+          position: 'relative',
+          mt: { xs: 6, md: 10 },
+          mb: { xs: 3, md: 5 },
+          mx: { xs: -3, md: -8 },
+          px: { xs: 3, md: 8 },
+          py: { xs: 1.25, md: 1.5 },
+          backgroundColor: 'var(--ink-primary)',
+          color: 'var(--ink-primary-fg)',
+          opacity: 0,
+          transform: 'translateY(8px)',
+          transition:
+            'opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+          ...(isVisible && {
+            opacity: 1,
+            transform: 'translateY(0)',
+          }),
+        }}
+      >
+        <Typography
+          component="h2"
+          sx={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: { xs: '0.85rem', md: '0.95rem' },
+            fontWeight: 600,
+            color: 'inherit',
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            lineHeight: 1,
+          }}
+        >
+          {text}
+        </Typography>
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -17,36 +57,23 @@ const SectionTitle = ({ text, eyebrow, subtitle }: SectionTitleProps) => {
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
-        gap: 1.5,
-        mb: 6,
+        gap: 1,
+        mb: 4,
         opacity: 0,
-        transform: 'translateY(12px)',
+        transform: 'translateY(8px)',
         transition:
-          'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)',
+          'opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
         ...(isVisible && {
           opacity: 1,
           transform: 'translateY(0)',
         }),
       }}
     >
-      {eyebrow && (
-        <Typography
-          sx={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.7rem',
-            color: 'var(--ink-mute)',
-            letterSpacing: '0.15em',
-            textTransform: 'uppercase',
-          }}
-        >
-          {eyebrow}
-        </Typography>
-      )}
       <Typography
         component="h2"
         sx={{
           fontFamily: 'var(--font-sans)',
-          fontSize: { xs: '2rem', md: '2.75rem' },
+          fontSize: { xs: '1.5rem', md: '1.85rem' },
           fontWeight: 600,
           color: 'var(--ink-text)',
           letterSpacing: '-0.02em',
@@ -55,20 +82,6 @@ const SectionTitle = ({ text, eyebrow, subtitle }: SectionTitleProps) => {
       >
         {text}
       </Typography>
-      {subtitle && (
-        <Typography
-          sx={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: '1.05rem',
-            color: 'var(--ink-soft)',
-            maxWidth: 640,
-            lineHeight: 1.55,
-            mt: 0.5,
-          }}
-        >
-          {subtitle}
-        </Typography>
-      )}
     </Box>
   );
 };

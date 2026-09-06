@@ -1,4 +1,4 @@
-import { Box, Typography, Container, Button } from '@mui/material';
+import { Box, Typography, Container, Button, Stack } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -15,37 +15,36 @@ export function Hero() {
       ref={ref}
       sx={{
         position: 'relative',
-        minHeight: { xs: 'auto', md: '100vh' },
+        minHeight: { xs: 'auto', md: '78vh' },
         display: 'flex',
         alignItems: 'center',
         bgcolor: 'var(--paper)',
         overflow: 'hidden',
         scrollMarginTop: { xs: 64, sm: 0 },
+        pt: { xs: 12, md: 0 },
       }}
     >
-      {/* Single subtle radial */}
       <Box
         sx={{
           position: 'absolute',
-          top: '-10%',
+          top: '-20%',
           right: '-15%',
-          width: '60%',
-          height: '80%',
+          width: '55%',
+          height: '90%',
           background:
             'radial-gradient(ellipse 60% 50% at center, var(--ink-primary-soft) 0%, transparent 70%)',
-          opacity: 0.6,
+          opacity: 0.55,
           pointerEvents: 'none',
         }}
       />
 
-      <Container maxWidth="lg" sx={{ position: 'relative', py: { xs: 10, md: 0 } }}>
-        {/* Status pill */}
+      <Container maxWidth="lg" sx={{ position: 'relative' }}>
         <Box
           sx={{
-            mb: 4,
             opacity: 0,
             transform: 'translateY(8px)',
-            transition: 'opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s',
+            transition:
+              'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s',
             ...(isVisible && {
               opacity: 1,
               transform: 'translateY(0)',
@@ -54,117 +53,69 @@ export function Hero() {
         >
           <Box
             sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 0.75,
-              border: '1px solid var(--border)',
-              borderRadius: 20,
-              px: 1.5,
-              py: 0.5,
-              backgroundColor: 'var(--paper)',
+              width: { xs: 36, md: 48 },
+              height: 3,
+              backgroundColor: 'var(--ink-primary)',
+              mb: 3,
+              borderRadius: 2,
             }}
-          >
-            <Box
-              sx={{
-                width: 6,
-                height: 6,
-                borderRadius: '50%',
-                backgroundColor: 'var(--ink-primary)',
-              }}
-            />
-            <Typography
-              sx={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
-                color: 'var(--ink-soft)',
-                letterSpacing: '0.05em',
-                textTransform: 'uppercase',
-              }}
-            >
-              Open to opportunities
-            </Typography>
-          </Box>
+          />
         </Box>
 
-        {/* Headline */}
         <Typography
           component="h1"
           sx={{
             fontFamily: 'var(--font-sans)',
-            fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
+            fontSize: { xs: '2.75rem', sm: '3.75rem', md: '5rem' },
             fontWeight: 600,
             color: 'var(--ink-text)',
-            lineHeight: 1.05,
-            letterSpacing: '-0.03em',
-            mb: 3,
-            maxWidth: 900,
+            lineHeight: 1.02,
+            letterSpacing: '-0.035em',
+            mb: 2,
+            maxWidth: 1000,
             opacity: 0,
             transform: 'translateY(12px)',
-            transition: 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s',
+            transition:
+              'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s',
             ...(isVisible && {
               opacity: 1,
               transform: 'translateY(0)',
             }),
           }}
         >
-          Senior Full-Stack Engineer building production systems with{' '}
-          <Box
-            component="span"
-            sx={{ color: 'var(--ink-primary)' }}
-          >
-            React
-          </Box>
-          {', '}
-          <Box
-            component="span"
-            sx={{ color: 'var(--ink-text)' }}
-          >
-            Next.js
-          </Box>
-          {', and '}
-          <Box
-            component="span"
-            sx={{ color: 'var(--ink-text)' }}
-          >
-            TypeScript
-          </Box>
-          .
+          Victor Zuluaga.
         </Typography>
 
-        {/* Subhead */}
         <Typography
           sx={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: { xs: '1.05rem', md: '1.2rem' },
+            fontFamily: 'var(--font-mono)',
+            fontSize: { xs: '0.85rem', md: '0.95rem' },
             color: 'var(--ink-soft)',
             maxWidth: 640,
             mb: 5,
-            lineHeight: 1.6,
+            lineHeight: 1.5,
+            letterSpacing: '-0.005em',
             opacity: 0,
             transform: 'translateY(12px)',
-            transition: 'opacity 0.7s ease 0.35s, transform 0.7s ease 0.35s',
+            transition:
+              'opacity 0.7s ease 0.35s, transform 0.7s ease 0.35s',
             ...(isVisible && {
               opacity: 1,
               transform: 'translateY(0)',
             }),
           }}
         >
-          I design, build, and ship scalable web applications end-to-end.
-          Focused on clean architecture, performance, and shipping real
-          impact in production environments.
+          Engineer. Builder. Shipping.
         </Typography>
 
-        {/* CTAs */}
-        <Box
+        <Stack
+          direction="row"
+          spacing={1.5}
           sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 1.5,
-            alignItems: 'center',
-            mb: 6,
             opacity: 0,
             transform: 'translateY(12px)',
-            transition: 'opacity 0.7s ease 0.5s, transform 0.7s ease 0.5s',
+            transition:
+              'opacity 0.7s ease 0.5s, transform 0.7s ease 0.5s',
             ...(isVisible && {
               opacity: 1,
               transform: 'translateY(0)',
@@ -174,13 +125,13 @@ export function Hero() {
           <Button
             variant="contained"
             onClick={() => scrollTo('projects')}
-            endIcon={<ArrowForwardIcon />}
+            endIcon={<ArrowForwardIcon sx={{ fontSize: 16 }} />}
             sx={{
               bgcolor: 'var(--ink-primary)',
               color: 'var(--ink-primary-fg)',
-              px: 3,
-              py: 1.25,
-              fontSize: '0.875rem',
+              px: 2.5,
+              py: 1,
+              fontSize: '0.8rem',
               fontWeight: 500,
               borderRadius: 1,
               '&:hover': {
@@ -189,7 +140,7 @@ export function Hero() {
               },
             }}
           >
-            View selected work
+            Work
           </Button>
           <Button
             variant="outlined"
@@ -197,9 +148,9 @@ export function Hero() {
             sx={{
               borderColor: 'var(--border-strong)',
               color: 'var(--ink-text)',
-              px: 3,
-              py: 1.25,
-              fontSize: '0.875rem',
+              px: 2.5,
+              py: 1,
+              fontSize: '0.8rem',
               fontWeight: 500,
               borderRadius: 1,
               borderWidth: '1px',
@@ -210,60 +161,9 @@ export function Hero() {
               },
             }}
           >
-            Get in touch
+            Contact
           </Button>
-        </Box>
-
-        {/* Quick stats — credibility signals */}
-        <Box
-          sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: { xs: 3, md: 6 },
-            pt: 5,
-            borderTop: '1px solid var(--border)',
-            opacity: 0,
-            transform: 'translateY(12px)',
-            transition: 'opacity 0.7s ease 0.65s, transform 0.7s ease 0.65s',
-            ...(isVisible && {
-              opacity: 1,
-              transform: 'translateY(0)',
-            }),
-          }}
-        >
-          {[
-            { value: '6+', label: 'Years building production apps' },
-            { value: '50+', label: 'Features shipped to production' },
-            { value: '100k+', label: 'Users served across products' },
-          ].map((stat) => (
-            <Box key={stat.label}>
-              <Typography
-                sx={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '1.75rem',
-                  fontWeight: 600,
-                  color: 'var(--ink-text)',
-                  letterSpacing: '-0.02em',
-                  lineHeight: 1,
-                  mb: 0.5,
-                }}
-              >
-                {stat.value}
-              </Typography>
-              <Typography
-                sx={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.7rem',
-                  color: 'var(--ink-mute)',
-                  letterSpacing: '0.05em',
-                  textTransform: 'uppercase',
-                }}
-              >
-                {stat.label}
-              </Typography>
-            </Box>
-          ))}
-        </Box>
+        </Stack>
       </Container>
     </Box>
   );

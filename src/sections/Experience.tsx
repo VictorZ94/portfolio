@@ -59,59 +59,46 @@ function TimelineEntry({
       sx={{
         position: 'relative',
         display: 'grid',
-        gridTemplateColumns: { xs: '1fr', md: '200px 1fr' },
-        gap: { xs: 1.5, md: 8 },
-        pb: isLast ? 0 : { xs: 6, md: 10 },
+        gridTemplateColumns: { xs: '1fr', md: '140px 1fr' },
+        gap: { xs: 0.5, md: 6 },
+        pb: isLast ? 0 : { xs: 4, md: 6 },
         opacity: 0,
         transform: 'translateY(8px)',
-        transition: `opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.1}s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.1}s`,
+        transition: `opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.08}s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.08}s`,
         ...(isVisible && {
           opacity: 1,
           transform: 'translateY(0)',
         }),
       }}
     >
-      {/* Left: period + company */}
       <Box>
         <Typography
           sx={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.75rem',
+            fontSize: '0.7rem',
             color: 'var(--ink-mute)',
             letterSpacing: '0.05em',
-            mb: 1,
+            mb: 0.5,
           }}
         >
           {job.period}
         </Typography>
-        <Typography
-          sx={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: '0.9rem',
-            color: 'var(--ink-soft)',
-            fontWeight: 500,
-          }}
-        >
-          {job.company}
-        </Typography>
       </Box>
 
-      {/* Right: role + achievements */}
       <Box
         sx={{
           position: 'relative',
-          pl: { md: 4 },
+          pl: { md: 3 },
           borderLeft: { md: '1px solid var(--border)' },
           '&::before': {
             content: '""',
             position: 'absolute',
-            left: -4,
+            left: -3,
             top: 8,
-            width: 7,
-            height: 7,
+            width: 5,
+            height: 5,
             borderRadius: '50%',
-            backgroundColor: 'var(--paper)',
-            border: '1.5px solid var(--ink-primary)',
+            backgroundColor: 'var(--ink-primary)',
             display: { xs: 'none', md: 'block' },
           },
         }}
@@ -120,14 +107,24 @@ function TimelineEntry({
           component="h3"
           sx={{
             fontFamily: 'var(--font-sans)',
-            fontSize: '1.15rem',
+            fontSize: '1.05rem',
             fontWeight: 600,
             color: 'var(--ink-text)',
-            mb: 2,
+            mb: 0.25,
             letterSpacing: '-0.01em',
           }}
         >
           {job.role}
+        </Typography>
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: '0.85rem',
+            color: 'var(--ink-soft)',
+            mb: 1.5,
+          }}
+        >
+          {job.company}
         </Typography>
         <Box component="ul" sx={{ pl: 0, m: 0, listStyle: 'none' }}>
           {job.achievements.map((achievement) => (
@@ -136,11 +133,11 @@ function TimelineEntry({
               component="li"
               sx={{
                 position: 'relative',
-                pl: 3,
-                mb: 1.5,
-                fontSize: '0.92rem',
+                pl: 2.5,
+                mb: 0.75,
+                fontSize: '0.85rem',
                 color: 'var(--ink-soft)',
-                lineHeight: 1.65,
+                lineHeight: 1.55,
                 fontFamily: 'var(--font-sans)',
                 '&::before': {
                   content: '"–"',
@@ -167,18 +164,14 @@ export function Experience() {
       component="section"
       sx={{
         position: 'relative',
-        py: { xs: 10, md: 14 },
+        py: { xs: 8, md: 12 },
         bgcolor: 'var(--paper)',
         borderTop: '1px solid var(--border)',
         scrollMarginTop: { xs: 64, sm: 0 },
       }}
     >
       <Container maxWidth="lg">
-        <SectionTitle
-          text="Experience"
-          eyebrow="02 — Experience"
-          subtitle="Senior IC with 6+ years shipping production systems across frontend and backend."
-        />
+        <SectionTitle text="Experience" band />
 
         <Box>
           {jobs.map((job, i) => (

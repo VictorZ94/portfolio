@@ -92,12 +92,12 @@ function ProjectCard({
         bgcolor: 'var(--paper)',
         border: '1px solid var(--border)',
         borderRadius: 2,
-        p: { xs: 3, md: 5 },
+        p: { xs: 2.5, md: 3.5 },
         display: 'flex',
         flexDirection: 'column',
         opacity: 0,
         transform: 'translateY(12px)',
-        transition: `opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.1}s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.1}s, border-color 0.2s ease`,
+        transition: `opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.08}s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.08}s, border-color 0.2s ease`,
         '&:hover': {
           borderColor: 'var(--ink-primary)',
         },
@@ -113,8 +113,8 @@ function ProjectCard({
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'baseline',
-          mb: 3,
-          pb: 2.5,
+          mb: 2,
+          pb: 2,
           borderBottom: '1px solid var(--border)',
           flexWrap: 'wrap',
           gap: 2,
@@ -124,54 +124,18 @@ function ProjectCard({
           <Typography
             sx={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.75rem',
+              fontSize: '0.7rem',
               color: 'var(--ink-mute)',
               letterSpacing: '0.05em',
             }}
           >
             № {project.num}
           </Typography>
-          {project.featured && (
-            <Box
-              sx={{
-                px: 1,
-                py: 0.25,
-                borderRadius: 1,
-                bgcolor: 'var(--ink-primary)',
-                color: 'var(--ink-primary-fg)',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.65rem',
-                letterSpacing: '0.05em',
-                textTransform: 'uppercase',
-                fontWeight: 600,
-              }}
-            >
-              Featured
-            </Box>
-          )}
-          {isPlaceholder && (
-            <Box
-              sx={{
-                px: 1,
-                py: 0.25,
-                borderRadius: 1,
-                border: '1px solid var(--border-strong)',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.65rem',
-                letterSpacing: '0.05em',
-                textTransform: 'uppercase',
-                fontWeight: 500,
-                color: 'var(--ink-mute)',
-              }}
-            >
-              TODO
-            </Box>
-          )}
         </Box>
         <Typography
           sx={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.7rem',
+            fontSize: '0.65rem',
             color: 'var(--ink-mute)',
             letterSpacing: '0.05em',
             textAlign: 'right',
@@ -186,7 +150,7 @@ function ProjectCard({
         component="h3"
         sx={{
           fontFamily: 'var(--font-sans)',
-          fontSize: { xs: '1.35rem', md: project.featured ? '1.85rem' : '1.4rem' },
+          fontSize: { xs: '1.2rem', md: project.featured ? '1.55rem' : '1.25rem' },
           fontWeight: 600,
           color: 'var(--ink-text)',
           mb: 1,
@@ -199,10 +163,10 @@ function ProjectCard({
       <Typography
         sx={{
           fontFamily: 'var(--font-sans)',
-          fontSize: '1rem',
+          fontSize: '0.9rem',
           color: 'var(--ink-soft)',
-          mb: 4,
-          lineHeight: 1.55,
+          mb: 3,
+          lineHeight: 1.5,
           maxWidth: 720,
         }}
       >
@@ -213,15 +177,15 @@ function ProjectCard({
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: { xs: '1fr', md: '120px 1fr' },
-          gap: { xs: 0.5, md: 4 },
-          mb: 2,
+          gridTemplateColumns: { xs: '1fr', md: '90px 1fr' },
+          gap: { xs: 0.25, md: 3 },
+          mb: 1.5,
         }}
       >
         <Typography
           sx={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.7rem',
+            fontSize: '0.65rem',
             color: 'var(--ink-mute)',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
@@ -233,9 +197,9 @@ function ProjectCard({
         <Typography
           sx={{
             fontFamily: 'var(--font-sans)',
-            fontSize: '0.92rem',
+            fontSize: '0.85rem',
             color: 'var(--ink-soft)',
-            lineHeight: 1.65,
+            lineHeight: 1.55,
           }}
         >
           {project.problem}
@@ -245,15 +209,15 @@ function ProjectCard({
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: { xs: '1fr', md: '120px 1fr' },
-          gap: { xs: 0.5, md: 4 },
-          mb: 2,
+          gridTemplateColumns: { xs: '1fr', md: '90px 1fr' },
+          gap: { xs: 0.25, md: 3 },
+          mb: 1.5,
         }}
       >
         <Typography
           sx={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.7rem',
+            fontSize: '0.65rem',
             color: 'var(--ink-mute)',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
@@ -265,9 +229,9 @@ function ProjectCard({
         <Typography
           sx={{
             fontFamily: 'var(--font-sans)',
-            fontSize: '0.92rem',
+            fontSize: '0.85rem',
             color: 'var(--ink-soft)',
-            lineHeight: 1.65,
+            lineHeight: 1.55,
           }}
         >
           {project.built}
@@ -277,15 +241,15 @@ function ProjectCard({
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: { xs: '1fr', md: '120px 1fr' },
-          gap: { xs: 0.5, md: 4 },
-          mb: 4,
+          gridTemplateColumns: { xs: '1fr', md: '90px 1fr' },
+          gap: { xs: 0.25, md: 3 },
+          mb: 3,
         }}
       >
         <Typography
           sx={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.7rem',
+            fontSize: '0.65rem',
             color: 'var(--ink-mute)',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
@@ -301,11 +265,11 @@ function ProjectCard({
               component="li"
               sx={{
                 position: 'relative',
-                pl: 3,
-                mb: 1,
-                fontSize: '0.92rem',
+                pl: 2.5,
+                mb: 0.5,
+                fontSize: '0.85rem',
                 color: 'var(--ink-soft)',
-                lineHeight: 1.6,
+                lineHeight: 1.5,
                 '&::before': {
                   content: '"–"',
                   position: 'absolute',
@@ -329,13 +293,13 @@ function ProjectCard({
           justifyContent: 'space-between',
           alignItems: 'center',
           mt: 'auto',
-          pt: 3,
+          pt: 2,
           borderTop: '1px solid var(--border)',
           flexWrap: 'wrap',
-          gap: 2,
+          gap: 1.5,
         }}
       >
-        <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 0.75 }}>
+        <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 0.5 }}>
           {project.stack.map((tech) => (
             <Chip
               key={tech}
@@ -344,8 +308,8 @@ function ProjectCard({
               variant="outlined"
               sx={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
-                height: 24,
+                fontSize: '0.65rem',
+                height: 22,
                 color: 'var(--ink-soft)',
                 borderColor: 'var(--border)',
                 backgroundColor: 'var(--paper-2)',
@@ -362,10 +326,10 @@ function ProjectCard({
             sx={{
               color: 'var(--ink-text)',
               fontFamily: 'var(--font-sans)',
-              fontSize: '0.8rem',
+              fontSize: '0.75rem',
               fontWeight: 500,
-              px: 1.5,
-              py: 0.5,
+              px: 1.25,
+              py: 0.25,
               minWidth: 0,
               '&:hover': {
                 bgcolor: 'transparent',
@@ -377,7 +341,7 @@ function ProjectCard({
               },
             }}
           >
-            {isPlaceholder ? 'Coming soon' : project.link.label}
+            {isPlaceholder ? 'Soon' : project.link.label}
           </Button>
         )}
       </Box>
@@ -392,25 +356,21 @@ export function Projects() {
       component="section"
       sx={{
         position: 'relative',
-        py: { xs: 10, md: 14 },
+        py: { xs: 8, md: 12 },
         bgcolor: 'var(--paper)',
         borderTop: '1px solid var(--border)',
         scrollMarginTop: { xs: 64, sm: 0 },
       }}
     >
       <Container maxWidth="lg">
-        <SectionTitle
-          text="Selected work"
-          eyebrow="03 — Projects"
-          subtitle="Real production systems. Each entry shows the problem, what was built, and the measurable impact."
-        />
+        <SectionTitle text="Projects" band />
 
         <Box
           sx={{
             display: 'grid',
             gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
             gridTemplateRows: { md: 'auto auto' },
-            gap: { xs: 3, md: 4 },
+            gap: { xs: 2.5, md: 3 },
           }}
         >
           <Box sx={{ gridColumn: { md: 'span 2' } }}>

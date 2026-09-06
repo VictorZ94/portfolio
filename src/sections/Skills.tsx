@@ -5,13 +5,11 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 interface SkillCategory {
   name: string;
   skills: string[];
-  years: string;
 }
 
 const skillCategories: SkillCategory[] = [
   {
     name: 'Frontend',
-    years: '6+ years',
     skills: [
       'React',
       'Next.js',
@@ -21,12 +19,10 @@ const skillCategories: SkillCategory[] = [
       'React Query',
       'Material UI',
       'Tailwind CSS',
-      'Design Systems',
     ],
   },
   {
     name: 'Backend',
-    years: '5+ years',
     skills: [
       'Node.js',
       'Nest.js',
@@ -34,7 +30,6 @@ const skillCategories: SkillCategory[] = [
       'FastAPI',
       'Django',
       'GraphQL',
-      'REST API design',
       'PostgreSQL',
       'MongoDB',
       'Redis',
@@ -42,40 +37,35 @@ const skillCategories: SkillCategory[] = [
   },
   {
     name: 'Infrastructure',
-    years: '4+ years',
     skills: [
       'AWS',
       'GCP',
       'Docker',
       'Kubernetes',
-      'CI/CD pipelines',
+      'CI/CD',
       'Vercel',
       'Terraform',
     ],
   },
   {
     name: 'Practices',
-    years: 'Ongoing',
     skills: [
       'System design',
-      'Test-driven development',
+      'TDD',
       'Code review',
       'Mentoring',
-      'Agile / Scrum',
       'Observability',
-      'Performance profiling',
+      'Performance',
     ],
   },
 ];
 
-function SkillRow({
+function SkillGroup({
   category,
   index,
-  isLast,
 }: {
   category: SkillCategory;
   index: number;
-  isLast: boolean;
 }) {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
 
@@ -83,14 +73,9 @@ function SkillRow({
     <Box
       ref={ref}
       sx={{
-        display: 'grid',
-        gridTemplateColumns: { xs: '1fr', md: '160px 100px 1fr' },
-        gap: { xs: 0.5, md: 6 },
-        py: 4,
-        borderBottom: isLast ? 'none' : '1px solid var(--border)',
         opacity: 0,
         transform: 'translateY(8px)',
-        transition: `opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.08}s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.08}s`,
+        transition: `opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.06}s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.06}s`,
         ...(isVisible && {
           opacity: 1,
           transform: 'translateY(0)',
@@ -99,35 +84,46 @@ function SkillRow({
     >
       <Typography
         sx={{
-          fontFamily: 'var(--font-sans)',
-          fontSize: '1rem',
-          fontWeight: 600,
-          color: 'var(--ink-text)',
-          letterSpacing: '-0.01em',
+          fontFamily: 'var(--font-mono)',
+          fontSize: '0.65rem',
+          color: 'var(--ink-mute)',
+          letterSpacing: '0.15em',
+          textTransform: 'uppercase',
+          mb: 1.5,
         }}
       >
         {category.name}
       </Typography>
-      <Typography
+      <Box
         sx={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: '0.75rem',
-          color: 'var(--ink-mute)',
-          letterSpacing: '0.05em',
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 0.75,
         }}
       >
-        {category.years}
-      </Typography>
-      <Typography
-        sx={{
-          fontFamily: 'var(--font-sans)',
-          fontSize: '0.92rem',
-          color: 'var(--ink-soft)',
-          lineHeight: 1.7,
-        }}
-      >
-        {category.skills.join(' · ')}
-      </Typography>
+        {category.skills.map((skill) => (
+          <Box
+            key={skill}
+            sx={{
+              px: 1.25,
+              py: 0.5,
+              fontFamily: 'var(--font-sans)',
+              fontSize: '0.78rem',
+              color: 'var(--ink-text)',
+              border: '1px solid var(--border-strong)',
+              borderRadius: 1,
+              backgroundColor: 'var(--paper-2)',
+              transition: 'all 0.15s ease',
+              '&:hover': {
+                borderColor: 'var(--ink-primary)',
+                color: 'var(--ink-primary)',
+              },
+            }}
+          >
+            {skill}
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 }
@@ -139,31 +135,24 @@ export function Skills() {
       component="section"
       sx={{
         position: 'relative',
-        py: { xs: 10, md: 14 },
+        py: { xs: 8, md: 12 },
         bgcolor: 'var(--paper)',
         borderTop: '1px solid var(--border)',
         scrollMarginTop: { xs: 64, sm: 0 },
       }}
     >
       <Container maxWidth="lg">
-        <SectionTitle
-          text="Skills & tools"
-          eyebrow="04 — Skills"
-          subtitle="What I reach for, organized by area of practice."
-        />
+        <SectionTitle text="Skills" band />
 
         <Box
           sx={{
-            borderTop: '1px solid var(--border)',
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
+            gap: { xs: 3, md: 5 },
           }}
         >
           {skillCategories.map((category, i) => (
-            <SkillRow
-              key={category.name}
-              category={category}
-              index={i}
-              isLast={i === skillCategories.length - 1}
-            />
+            <SkillGroup key={category.name} category={category} index={i} />
           ))}
         </Box>
       </Container>

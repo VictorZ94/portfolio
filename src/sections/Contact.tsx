@@ -45,24 +45,23 @@ export function Contact() {
       ref={ref}
       sx={{
         position: 'relative',
-        py: { xs: 10, md: 14 },
+        py: { xs: 8, md: 12 },
         bgcolor: 'var(--paper)',
         borderTop: '1px solid var(--border)',
         overflow: 'hidden',
         scrollMarginTop: { xs: 64, sm: 0 },
       }}
     >
-      {/* Single subtle radial */}
       <Box
         sx={{
           position: 'absolute',
           top: '-10%',
           left: '-15%',
-          width: '60%',
+          width: '55%',
           height: '80%',
           background:
             'radial-gradient(ellipse 60% 50% at center, var(--ink-primary-soft) 0%, transparent 70%)',
-          opacity: 0.5,
+          opacity: 0.45,
           pointerEvents: 'none',
         }}
       />
@@ -81,52 +80,25 @@ export function Contact() {
           }}
         >
           <Typography
-            sx={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.7rem',
-              color: 'var(--ink-mute)',
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              mb: 2,
-            }}
-          >
-            06 — Contact
-          </Typography>
-
-          <Typography
             component="h2"
             sx={{
               fontFamily: 'var(--font-sans)',
-              fontSize: { xs: '2.25rem', md: '3rem' },
+              fontSize: { xs: '2rem', md: '2.5rem' },
               fontWeight: 600,
               color: 'var(--ink-text)',
               letterSpacing: '-0.025em',
               lineHeight: 1.1,
-              mb: 2,
+              mb: 1,
             }}
           >
-            Let's talk.
-          </Typography>
-
-          <Typography
-            sx={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '1.05rem',
-              color: 'var(--ink-soft)',
-              mb: 5,
-              maxWidth: 560,
-              lineHeight: 1.55,
-            }}
-          >
-            Open to senior full-stack roles, contract work, and technical
-            consulting. The fastest way to reach me is email.
+            Say hi.
           </Typography>
         </Box>
 
-        {/* Contact list */}
         <Box
           sx={{
             borderTop: '1px solid var(--border)',
+            mt: 4,
             opacity: 0,
             transform: 'translateY(8px)',
             transition:
@@ -146,10 +118,10 @@ export function Contact() {
               rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
               sx={{
                 display: 'grid',
-                gridTemplateColumns: { xs: '1fr', md: '160px 1fr auto' },
-                gap: { xs: 0.5, md: 4 },
+                gridTemplateColumns: { xs: '1fr', md: '120px 1fr auto' },
+                gap: { xs: 0.5, md: 3 },
                 alignItems: 'center',
-                py: 3,
+                py: 2,
                 borderBottom: '1px solid var(--border)',
                 textDecoration: 'none',
                 color: 'var(--ink-text)',
@@ -172,14 +144,14 @@ export function Contact() {
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Icon
                   sx={{
-                    fontSize: 18,
+                    fontSize: 16,
                     color: primary ? 'var(--ink-primary)' : 'var(--ink-mute)',
                   }}
                 />
                 <Typography
                   sx={{
                     fontFamily: 'var(--font-sans)',
-                    fontSize: '0.9rem',
+                    fontSize: '0.85rem',
                     fontWeight: 600,
                     color: 'var(--ink-text)',
                     letterSpacing: '-0.005em',
@@ -192,7 +164,7 @@ export function Contact() {
                 className="contact-value"
                 sx={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.88rem',
+                  fontSize: '0.82rem',
                   color: 'var(--ink-soft)',
                   letterSpacing: '0.01em',
                   transition: 'color 0.2s ease',
@@ -203,7 +175,7 @@ export function Contact() {
               <ArrowOutwardIcon
                 className="contact-arrow"
                 sx={{
-                  fontSize: 16,
+                  fontSize: 14,
                   color: 'var(--ink-mute)',
                   transition: 'all 0.2s ease',
                   display: { xs: 'none', md: 'block' },
@@ -213,11 +185,10 @@ export function Contact() {
           ))}
         </Box>
 
-        {/* Footer */}
         <Box
           sx={{
-            mt: 8,
-            pt: 4,
+            mt: 6,
+            pt: 3,
             borderTop: '1px solid var(--border)',
             display: 'flex',
             justifyContent: 'space-between',
@@ -237,22 +208,22 @@ export function Contact() {
           <Typography
             sx={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.72rem',
+              fontSize: '0.7rem',
               color: 'var(--ink-mute)',
               letterSpacing: '0.05em',
             }}
           >
-            © 2026 Victor Zuluaga
+            © 2026
           </Typography>
           <Typography
             sx={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.72rem',
+              fontSize: '0.7rem',
               color: 'var(--ink-mute)',
               letterSpacing: '0.05em',
             }}
           >
-            Built with React, TypeScript & Vite
+            React · TypeScript · Vite
           </Typography>
         </Box>
       </Container>

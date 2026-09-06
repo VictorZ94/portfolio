@@ -109,20 +109,9 @@ function DrawerContent({
             color: 'var(--ink-text)',
             lineHeight: 1.25,
             letterSpacing: '-0.015em',
-            mb: 0.5,
           }}
         >
           Victor Zuluaga
-        </Typography>
-        <Typography
-          sx={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.72rem',
-            color: 'var(--ink-mute)',
-            letterSpacing: '0.05em',
-          }}
-        >
-          Senior Full-Stack Engineer
         </Typography>
       </Box>
 

@@ -71,16 +71,16 @@ function StatTile({
     <Box
       ref={ref}
       sx={{
-        p: 3,
+        p: 2,
         border: '1px solid var(--border)',
         borderRadius: 2,
         backgroundColor: 'var(--paper)',
         display: 'flex',
         flexDirection: 'column',
-        gap: 1,
+        gap: 0.5,
         opacity: 0,
         transform: 'translateY(8px)',
-        transition: `opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.08}s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.08}s, border-color 0.2s ease`,
+        transition: `opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.06}s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.06}s, border-color 0.2s ease`,
         '&:hover': {
           borderColor: 'var(--ink-primary)',
         },
@@ -93,7 +93,7 @@ function StatTile({
       <Typography
         sx={{
           fontFamily: 'var(--font-sans)',
-          fontSize: { xs: '2rem', md: '2.5rem' },
+          fontSize: { xs: '1.65rem', md: '2rem' },
           fontWeight: 600,
           color: 'var(--ink-text)',
           letterSpacing: '-0.025em',
@@ -105,7 +105,7 @@ function StatTile({
       <Typography
         sx={{
           fontFamily: 'var(--font-mono)',
-          fontSize: '0.72rem',
+          fontSize: '0.65rem',
           color: 'var(--ink-mute)',
           letterSpacing: '0.1em',
           textTransform: 'uppercase',
@@ -563,14 +563,14 @@ function ChartCard({
   return (
     <Box
       sx={{
-        p: { xs: 3, md: 4 },
+        p: { xs: 2, md: 2.5 },
         border: '1px solid var(--border)',
         borderRadius: 2,
         backgroundColor: 'var(--paper)',
         opacity: 0,
         transform: 'translateY(8px)',
         transition:
-          'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease',
+          'opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease',
         '&:hover': {
           borderColor: 'var(--border-strong)',
         },
@@ -583,11 +583,11 @@ function ChartCard({
       <Typography
         sx={{
           fontFamily: 'var(--font-mono)',
-          fontSize: '0.7rem',
+          fontSize: '0.65rem',
           color: 'var(--ink-mute)',
           letterSpacing: '0.1em',
           textTransform: 'uppercase',
-          mb: 3,
+          mb: 2,
         }}
       >
         {title}
@@ -645,21 +645,17 @@ export function GitHubStats() {
       component="section"
       sx={{
         position: 'relative',
-        py: { xs: 10, md: 14 },
+        py: { xs: 8, md: 12 },
         bgcolor: 'var(--paper)',
         borderTop: '1px solid var(--border)',
         scrollMarginTop: { xs: 64, sm: 0 },
       }}
     >
       <Container maxWidth="lg">
-        <SectionTitle
-          text="GitHub stats"
-          eyebrow="05 — GitHub"
-          subtitle="Live data from my GitHub profile: repositories, languages, and activity."
-        />
+        <SectionTitle text="GitHub" band />
 
         {isStale && data && (
-          <Box sx={{ mb: 3 }}>
+          <Box sx={{ mb: 2 }}>
             <Typography
               sx={{
                 fontFamily: 'var(--font-mono)',
@@ -668,7 +664,7 @@ export function GitHubStats() {
                 letterSpacing: '0.05em',
               }}
             >
-              ↻ showing cached data · live refresh failed
+              ↻ cached · refresh failed
             </Typography>
           </Box>
         )}
@@ -679,8 +675,8 @@ export function GitHubStats() {
           sx={{
             display: 'grid',
             gridTemplateColumns: { xs: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
-            gap: 2,
-            mb: 4,
+            gap: 1.5,
+            mb: 3,
           }}
         >
           {showFallback
@@ -715,8 +711,8 @@ export function GitHubStats() {
             sx={{
               display: 'grid',
               gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
-              gap: 3,
-              mb: 4,
+              gap: 2,
+              mb: 3,
             }}
           >
             <ChartCard title="Languages" isVisible={isVisible}>
@@ -762,10 +758,10 @@ export function GitHubStats() {
 
         {/* Activity chart */}
         {data && (
-          <Box sx={{ mb: 4 }}>
+          <Box sx={{ mb: 3 }}>
             <Box
               sx={{
-                p: { xs: 3, md: 4 },
+                p: { xs: 2, md: 2.5 },
                 border: '1px solid var(--border)',
                 borderRadius: 2,
                 backgroundColor: 'var(--paper)',
@@ -782,8 +778,8 @@ export function GitHubStats() {
             sx={{
               display: 'grid',
               gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
-              gap: 3,
-              mb: 4,
+              gap: 2,
+              mb: 3,
             }}
           >
             {[0, 1].map((i) => (
@@ -805,7 +801,7 @@ export function GitHubStats() {
         )}
 
         {/* View all link */}
-        <Box sx={{ mt: 4 }}>
+        <Box sx={{ mt: 3 }}>
           <Box
             component="a"
             href={GITHUB_PROFILE_URL}
@@ -815,14 +811,14 @@ export function GitHubStats() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: 0.75,
-              px: 2.5,
-              py: 1,
+              px: 2,
+              py: 0.75,
               border: '1px solid var(--border-strong)',
               borderRadius: 1,
               color: 'var(--ink-text)',
               textDecoration: 'none',
               fontFamily: 'var(--font-sans)',
-              fontSize: '0.85rem',
+              fontSize: '0.8rem',
               fontWeight: 500,
               transition: 'all 0.2s ease',
               '&:hover': {
@@ -832,8 +828,8 @@ export function GitHubStats() {
               },
             }}
           >
-            View full profile on GitHub
-            <OpenInNewIcon sx={{ fontSize: 14 }} />
+            Open profile
+            <OpenInNewIcon sx={{ fontSize: 13 }} />
           </Box>
         </Box>
 
@@ -841,8 +837,8 @@ export function GitHubStats() {
         {showFallback && (
           <Box
             sx={{
-              mt: 4,
-              p: 3,
+              mt: 3,
+              p: 2,
               border: '1px solid var(--border)',
               borderRadius: 2,
               textAlign: 'center',
@@ -851,11 +847,11 @@ export function GitHubStats() {
             <Typography
               sx={{
                 fontFamily: 'var(--font-sans)',
-                fontSize: '0.95rem',
+                fontSize: '0.85rem',
                 color: 'var(--ink-soft)',
               }}
             >
-              Unable to load GitHub stats right now.{' '}
+              Couldn't load stats.{' '}
               <Box
                 component="a"
                 href={GITHUB_PROFILE_URL}
@@ -867,7 +863,7 @@ export function GitHubStats() {
                   borderBottom: '1px solid var(--ink-primary)',
                 }}
               >
-                View profile directly →
+                Open profile →
               </Box>
             </Typography>
           </Box>
@@ -875,16 +871,16 @@ export function GitHubStats() {
 
         {/* Last updated */}
         {data && (
-          <Box sx={{ mt: 3 }}>
+          <Box sx={{ mt: 2 }}>
             <Typography
               sx={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
+                fontSize: '0.65rem',
                 color: 'var(--ink-mute)',
                 letterSpacing: '0.05em',
               }}
             >
-              Last updated {formatRelative(new Date(data.fetchedAt).toISOString())}
+              Updated {formatRelative(new Date(data.fetchedAt).toISOString())}
             </Typography>
           </Box>
         )}
