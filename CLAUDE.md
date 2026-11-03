@@ -18,10 +18,10 @@ No test framework is configured. There is no CI/CD or pre-commit hooks — run `
 A single-page personal portfolio. React 19 + TypeScript, bundled by Vite 8.
 
 - **Entry:** `src/main.tsx` mounts `<App>` into `#root` under `<StrictMode>`.
-- **`App.tsx`** renders only `ResponsiveDrawer` (`src/Sidebar.tsx`), which is the top-level layout shell — a fixed `AppBar`, a responsive `Drawer` (MUI `temporary` variant on mobile, `permanent` on desktop), and a `main` content `Box`. `drawerWidth = 240` drives the responsive width/margin math throughout.
-- **`Intro.tsx`** is the content section rendered inside the drawer's main area. New page sections follow this pattern: a component in `src/`, imported into the main `Box` in `Sidebar.tsx`.
-
-The Sidebar/drawer is currently MUI demo scaffolding (placeholder list items like "Inbox"/"Drafts", Lorem ipsum). Expect to replace this with real portfolio content.
+- **`App.tsx`** wraps `Page` (`src/Page.tsx`) in the MUI theme. `Page` is a single centered column: `Header` (nav + Invert toggle), then `sections/` Hero, Work, Projects, Contact.
+- New sections use `components/Section.tsx` (heading column + content column) and are added to `Page.tsx`.
+- Design: four calm palettes — Mist (default), Sand, Slate, Forest — defined as `[data-theme]` token blocks in `index.css`, listed in `context/themes.ts`, and switched by the swatch picker in `Header.tsx` (state in `context/ThemeContext.tsx`). Type: **Anybody** (variable width) for display, **Hanken Grotesk** for body. Shared sx helpers (`linkSx`, `metaSx`, `displaySx`, `settleIn`) are in `src/styles.ts`.
+- Projects pulls the top repos from the GitHub API via `hooks/useGitHubStats.ts`.
 
 ## Key conventions
 
