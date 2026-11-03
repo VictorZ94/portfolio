@@ -1,12 +1,9 @@
 import * as React from 'react';
-import type { InkKey, ThemeMode } from './themeTokens';
+import type { ThemeMode } from './themes';
 
 interface ThemeContextValue {
   mode: ThemeMode;
-  ink: InkKey;
   setMode: (mode: ThemeMode) => void;
-  setInk: (ink: InkKey) => void;
-  toggleMode: () => void;
 }
 
 const ThemeContext = React.createContext<ThemeContextValue | undefined>(undefined);
