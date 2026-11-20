@@ -1,6 +1,7 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { Section } from '../components/Section';
-import { linkSx, metaSx } from '../styles';
+import { Footer } from '../components/Footer';
+import { linkSx } from '../styles';
 
 const EMAIL = 'zrvictor00@gmail.com';
 
@@ -45,9 +46,7 @@ export function Contact() {
         </Box>
       </Section>
 
-      <Box component="footer" sx={{ py: 4, borderTop: '1px solid var(--line)' }}>
-        <Typography sx={metaSx}>© 2026 Victor Zuluaga</Typography>
-      </Box>
+      <Footer />
     </>
   );
 }

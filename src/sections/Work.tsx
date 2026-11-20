@@ -8,30 +8,55 @@ interface Job {
   company: string;
   /** The single result worth remembering from this role. */
   highlight: string;
+  tasks: string[];
+  stack: string[];
 }
 
 const JOBS: Job[] = [
   {
-    period: '2022 – now',
-    role: 'Senior Full-Stack Engineer',
-    company: 'Tech Company Inc.',
-    highlight: 'Cut page load time by 40% across 12 product surfaces.',
-  },
-  {
-    period: '2020 – 2022',
+    period: 'Apr 2024 – Feb 2026',
     role: 'Full-Stack Developer',
-    company: 'Digital Solutions Co.',
-    highlight: 'Built 4 React apps serving 100k+ monthly users.',
+    company: 'Metatate',
+    highlight:
+      'Led frontend development and moved the backend from Next.js to NestJS, making the ' +
+      'platform easier to scale and maintain.',
+    tasks: [
+      'Built complex flows in Next.js from Figma designs, including Gmail API invitations and ' +
+        'data-policy approval workflows.',
+      'Added Firebase multi-factor authentication (SMS and TOTP) and Google sign-in, with access ' +
+        'control across multiple roles.',
+      'Refactored backend services into NestJS modules with a clearer structure.',
+    ],
+    stack: ['Next.js', 'React', 'NestJS', 'TypeScript', 'Firebase', 'Gmail API'],
   },
   {
-    period: '2018 – 2020',
-    role: 'Junior Developer',
-    company: 'StartUp Labs',
-    highlight: 'Took search queries from 800 ms to 180 ms at p95.',
+    period: 'Jan 2022 – Jan 2023',
+    role: 'Software Developer',
+    company: 'Teamclass',
+    highlight:
+      'Built address validation with geolocation APIs, significantly reducing delivery errors ' +
+      'for physical event kits.',
+    tasks: [
+      'Designed and built a dynamic, Typeform-style survey engine in React and GraphQL.',
+      'Improved data fetching and caching between frontend and backend with Apollo Client.',
+      'Developed and optimised interfaces for a B2B corporate events platform in an agile team.',
+    ],
+    stack: ['React', 'Next.js', 'GraphQL', 'Apollo Client'],
+  },
+  {
+    period: 'Oct 2021 – Dec 2021',
+    role: 'Backend Developer',
+    company: 'Roiback',
+    highlight: 'Resolved every critical client-reported bug assigned during the contract.',
+    tasks: [
+      'Developed and maintained backend features for hotel e-commerce platforms in Django.',
+      'Improved code quality and contributed to the team’s technical documentation.',
+    ],
+    stack: ['Python', 'Django'],
   },
 ];
 
-const TOOLS = ['TypeScript', 'React', 'Next.js', 'Node.js', 'PostgreSQL', 'AWS'];
+const TOOLS = ['TypeScript', 'React', 'Next.js', 'Node.js', 'NestJS', 'PostgreSQL', 'GCP'];
 
 export function Work() {
   return (
@@ -43,10 +68,10 @@ export function Work() {
             key={job.company}
             sx={{
               display: 'grid',
-              gridTemplateColumns: { xs: '1fr', sm: '130px 1fr' },
+              gridTemplateColumns: { xs: '1fr', sm: '170px 1fr' },
               columnGap: 4,
               rowGap: 0.5,
-              pb: 5,
+              pb: 6,
             }}
           >
             <Typography sx={{ ...metaSx, pt: 0.5 }}>{job.period}</Typography>
@@ -58,7 +83,36 @@ export function Work() {
                   {job.company}
                 </Box>
               </Typography>
-              <Typography sx={{ mt: 0.75, maxWidth: '52ch' }}>{job.highlight}</Typography>
+              <Typography sx={{ mt: 0.75, maxWidth: '58ch' }}>{job.highlight}</Typography>
+              <Box
+                component="ul"
+                sx={{ listStyle: 'none', p: 0, m: 0, mt: 1.5, display: 'grid', gap: 0.75 }}
+              >
+                {job.tasks.map((task) => (
+                  <Box
+                    component="li"
+                    key={task}
+                    sx={{
+                      color: 'var(--soft)',
+                      maxWidth: '62ch',
+                      pl: 2,
+                      position: 'relative',
+                      '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        left: 0,
+                        top: '0.75em',
+                        width: 6,
+                        height: '1px',
+                        backgroundColor: 'var(--accent)',
+                      },
+                    }}
+                  >
+                    {task}
+                  </Box>
+                ))}
+              </Box>
+              <Typography sx={{ ...metaSx, mt: 1.5 }}>{job.stack.join(' · ')}</Typography>
             </Box>
           </Box>
         ))}
