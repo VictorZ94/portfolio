@@ -1,170 +1,102 @@
-import { Box, Typography, Container, Button, Stack } from '@mui/material';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import { Box, Typography } from '@mui/material';
+import { displaySx, linkSx, settleIn } from '../styles';
+
+const NAME_LINES = ['Victor', 'Zuluaga'];
+const LETTER_STAGGER = 0.05;
+
+const LINKS = [
+  { label: 'Email', href: 'mailto:zrvictor00@gmail.com' },
+  { label: 'GitHub', href: 'https://github.com/victorz94' },
+  { label: 'LinkedIn', href: 'https://linkedin.com' },
+] as const;
 
 export function Hero() {
-  const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  let letterIndex = 0;
 
   return (
     <Box
-      id="hero"
       component="section"
-      ref={ref}
+      id="top"
       sx={{
-        position: 'relative',
-        minHeight: { xs: 'auto', md: '78vh' },
+        minHeight: { xs: '70svh', md: '68svh' },
         display: 'flex',
-        alignItems: 'center',
-        bgcolor: 'var(--paper)',
-        overflow: 'hidden',
-        scrollMarginTop: { xs: 64, sm: 0 },
-        pt: { xs: 12, md: 0 },
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        pb: { xs: 6, md: 8 },
       }}
     >
-      <Box
+      <Typography
+        component="h1"
+        aria-label={NAME_LINES.join(' ')}
         sx={{
-          position: 'absolute',
-          top: '-20%',
-          right: '-15%',
-          width: '55%',
-          height: '90%',
-          background:
-            'radial-gradient(ellipse 60% 50% at center, var(--ink-primary-soft) 0%, transparent 70%)',
-          opacity: 0.55,
-          pointerEvents: 'none',
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(3rem, 11vw, 8rem)',
+          lineHeight: 0.9,
+          ml: '-0.04em',
         }}
-      />
+      >
+        {NAME_LINES.map((line) => (
+          <Box key={line} component="span" aria-hidden sx={{ display: 'block' }}>
+            {line.split('').map((char) => {
+              const delay = 0.15 + letterIndex++ * LETTER_STAGGER;
+              return (
+                <Box
+                  key={`${line}-${delay}`}
+                  component="span"
+                  sx={{
+                    display: 'inline-block',
+                    fontStretch: '112%',
+                    fontWeight: 650,
+                    animation: `develop 1s var(--ease) ${delay}s backwards`,
+                    transition: 'font-stretch 0.5s var(--ease), font-weight 0.5s var(--ease)',
+                    '&:hover': { fontStretch: '120%', fontWeight: 700 },
+                  }}
+                >
+                  {char}
+                </Box>
+              );
+            })}
+          </Box>
+        ))}
+      </Typography>
 
-      <Container maxWidth="lg" sx={{ position: 'relative' }}>
+      <Box sx={settleIn(0.9)}>
+        <Typography
+          component="p"
+          sx={{ ...displaySx('105%', 500), fontSize: { xs: '1.25rem', md: '1.5rem' }, mt: { xs: 2.5, md: 3 } }}
+        >
+          Senior Full-Stack Engineer
+        </Typography>
+
         <Box
           sx={{
-            opacity: 0,
-            transform: 'translateY(8px)',
-            transition:
-              'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s',
-            ...(isVisible && {
-              opacity: 1,
-              transform: 'translateY(0)',
-            }),
+            mt: 1.5,
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'baseline',
+            justifyContent: 'space-between',
+            gap: 3,
           }}
         >
-          <Box
-            sx={{
-              width: { xs: 36, md: 48 },
-              height: 3,
-              backgroundColor: 'var(--ink-primary)',
-              mb: 3,
-              borderRadius: 2,
-            }}
-          />
+          <Typography sx={{ color: 'var(--soft)', fontSize: '1.1rem', maxWidth: '40ch' }}>
+            I build web products end to end, from the database to the interface.
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 3 }}>
+            {LINKS.map((link) => (
+              <Box
+                key={link.label}
+                component="a"
+                href={link.href}
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                sx={linkSx}
+              >
+                {link.label}
+              </Box>
+            ))}
+          </Box>
         </Box>
-
-        <Typography
-          component="h1"
-          sx={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: { xs: '2.75rem', sm: '3.75rem', md: '5rem' },
-            fontWeight: 600,
-            color: 'var(--ink-text)',
-            lineHeight: 1.02,
-            letterSpacing: '-0.035em',
-            mb: 2,
-            maxWidth: 1000,
-            opacity: 0,
-            transform: 'translateY(12px)',
-            transition:
-              'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s',
-            ...(isVisible && {
-              opacity: 1,
-              transform: 'translateY(0)',
-            }),
-          }}
-        >
-          Victor Zuluaga.
-        </Typography>
-
-        <Typography
-          sx={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: { xs: '0.85rem', md: '0.95rem' },
-            color: 'var(--ink-soft)',
-            maxWidth: 640,
-            mb: 5,
-            lineHeight: 1.5,
-            letterSpacing: '-0.005em',
-            opacity: 0,
-            transform: 'translateY(12px)',
-            transition:
-              'opacity 0.7s ease 0.35s, transform 0.7s ease 0.35s',
-            ...(isVisible && {
-              opacity: 1,
-              transform: 'translateY(0)',
-            }),
-          }}
-        >
-          Engineer. Builder. Shipping.
-        </Typography>
-
-        <Stack
-          direction="row"
-          spacing={1.5}
-          sx={{
-            opacity: 0,
-            transform: 'translateY(12px)',
-            transition:
-              'opacity 0.7s ease 0.5s, transform 0.7s ease 0.5s',
-            ...(isVisible && {
-              opacity: 1,
-              transform: 'translateY(0)',
-            }),
-          }}
-        >
-          <Button
-            variant="contained"
-            onClick={() => scrollTo('projects')}
-            endIcon={<ArrowForwardIcon sx={{ fontSize: 16 }} />}
-            sx={{
-              bgcolor: 'var(--ink-primary)',
-              color: 'var(--ink-primary-fg)',
-              px: 2.5,
-              py: 1,
-              fontSize: '0.8rem',
-              fontWeight: 500,
-              borderRadius: 1,
-              '&:hover': {
-                bgcolor: 'var(--ink-primary)',
-                filter: 'brightness(0.95)',
-              },
-            }}
-          >
-            Work
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() => scrollTo('contact')}
-            sx={{
-              borderColor: 'var(--border-strong)',
-              color: 'var(--ink-text)',
-              px: 2.5,
-              py: 1,
-              fontSize: '0.8rem',
-              fontWeight: 500,
-              borderRadius: 1,
-              borderWidth: '1px',
-              '&:hover': {
-                borderColor: 'var(--ink-text)',
-                bgcolor: 'var(--paper-2)',
-                borderWidth: '1px',
-              },
-            }}
-          >
-            Contact
-          </Button>
-        </Stack>
-      </Container>
+      </Box>
     </Box>
   );
 }
