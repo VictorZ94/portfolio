@@ -7,6 +7,8 @@ import { Projects } from './sections/Projects';
 import { Contact } from './sections/Contact';
 import { ProjectPage } from './pages/ProjectPage';
 import { parseRoute, useHash } from './router';
+import { findProject } from './data/projects';
+import { useLanguage } from './context/useLanguage';
 
 function Home() {
   return (
@@ -22,6 +24,13 @@ function Home() {
 export default function Page() {
   const hash = useHash();
   const route = parseRoute(hash);
+  const { t } = useLanguage();
+
+  React.useEffect(() => {
+    const current = parseRoute(hash);
+    const project = current.name === 'project' ? findProject(current.slug) : undefined;
+    document.title = project ? `${project.name} — Victor Zuluaga` : t.meta.title;
+  }, [hash, t]);
 
   // Switching views replaces the page content, so scroll explicitly: to the top of
   // a project page, or to the section anchor (`#projects`) when coming back home.

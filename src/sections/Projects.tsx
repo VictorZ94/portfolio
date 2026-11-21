@@ -7,6 +7,7 @@ import { projectHref } from '../router';
 import { GITHUB_PROFILE_URL, useGitHubStats } from '../hooks/useGitHubStats';
 import type { GitHubRepo } from '../hooks/useGitHubStats';
 import { displaySx, linkSx, metaSx } from '../styles';
+import { useLanguage } from '../context/useLanguage';
 
 const REPO_LIMIT = 4;
 
@@ -21,18 +22,19 @@ function pickRepos(repos: GitHubRepo[]): GitHubRepo[] {
 }
 
 function RepoList() {
+  const { t } = useLanguage();
   const { data, loading, error } = useGitHubStats();
 
   if (loading) {
-    return <Typography sx={metaSx}>Loading repositories…</Typography>;
+    return <Typography sx={metaSx}>{t.projects.loading}</Typography>;
   }
 
   if (error || !data || data.repos.length === 0) {
     return (
       <Typography sx={metaSx}>
-        GitHub didn’t respond.{' '}
+        {t.projects.noResponse}{' '}
         <Box component="a" href={GITHUB_PROFILE_URL} target="_blank" rel="noopener noreferrer" sx={linkSx}>
-          See the repositories on GitHub
+          {t.projects.seeOnGitHub}
         </Box>
       </Typography>
     );
@@ -71,7 +73,7 @@ function RepoList() {
           <Typography sx={{ ...metaSx, display: 'flex', gap: 2, justifyContent: { sm: 'flex-end' } }}>
             {repo.language && <span>{repo.language}</span>}
             {repo.stargazers_count > 0 && (
-              <span aria-label={`${repo.stargazers_count} stars`}>★ {repo.stargazers_count}</span>
+              <span aria-label={t.projects.stars(repo.stargazers_count)}>★ {repo.stargazers_count}</span>
             )}
           </Typography>
         </Box>
@@ -81,8 +83,10 @@ function RepoList() {
 }
 
 export function Projects() {
+  const { locale, t } = useLanguage();
+
   return (
-    <Section id="projects" title="Projects">
+    <Section id="projects" title={t.projects.title}>
       <Box
         sx={{
           display: 'grid',
@@ -106,7 +110,7 @@ export function Projects() {
                 '&:hover': { transform: 'translateY(-4px)' },
               }}
             >
-              <Screenshot shot={project.cover} host={project.host} showCaption={false} />
+              <Screenshot shot={project.cover} host={project.host} showCaption={false} ratio="16 / 10" />
             </Box>
             <Box sx={{ mt: 2.5 }}>
               <StatusBadge status={project.status} />
@@ -118,11 +122,11 @@ export function Projects() {
             >
               {project.name}
             </Typography>
-            <Typography sx={{ mt: 1, maxWidth: '44ch' }}>{project.tagline}</Typography>
+            <Typography sx={{ mt: 1, maxWidth: '44ch' }}>{project.tagline[locale]}</Typography>
             <Typography sx={{ ...metaSx, mt: 1.5 }}>{project.stack.slice(0, 5).join(' · ')}</Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, mt: 2 }}>
               <Box component="a" href={projectHref(project.slug)} sx={{ ...linkSx, fontWeight: 600 }}>
-                Read the case study →
+                {t.projects.caseStudy} →
               </Box>
               <ExternalLinks links={project.links} />
             </Box>
@@ -131,7 +135,7 @@ export function Projects() {
       </Box>
 
       <Typography component="h3" sx={{ fontSize: '1.05rem', fontWeight: 600, mb: 1.5 }}>
-        On GitHub
+        {t.projects.onGitHub}
       </Typography>
       <RepoList />
     </Section>

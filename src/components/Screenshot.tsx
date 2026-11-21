@@ -1,18 +1,23 @@
 import { Box, Typography } from '@mui/material';
 import type { Shot } from '../data/projects';
 import { metaSx } from '../styles';
+import { useLanguage } from '../context/useLanguage';
 
 interface ScreenshotProps {
   shot: Shot;
   host?: string;
   showCaption?: boolean;
   eager?: boolean;
+  /** Crop to a fixed aspect ratio (e.g. to line up cards). Defaults to the image's own shape. */
+  ratio?: string;
 }
 
-const RATIO = '16 / 10';
+const PLACEHOLDER_RATIO = '16 / 10';
 
 /** A screenshot in a quiet browser frame, or a labelled placeholder until one exists. */
-export function Screenshot({ shot, host, showCaption = true, eager = false }: ScreenshotProps) {
+export function Screenshot({ shot, host, showCaption = true, eager = false, ratio }: ScreenshotProps) {
+  const { locale, t } = useLanguage();
+  const alt = shot.alt[locale];
   return (
     <Box component="figure" sx={{ m: 0 }}>
       <Box
@@ -52,22 +57,21 @@ export function Screenshot({ shot, host, showCaption = true, eager = false }: Sc
           <Box
             component="img"
             src={shot.src}
-            alt={shot.alt}
+            alt={alt}
             loading={eager ? 'eager' : 'lazy'}
             sx={{
               display: 'block',
               width: '100%',
-              aspectRatio: RATIO,
-              objectFit: 'cover',
-              objectPosition: 'top',
+              height: 'auto',
+              ...(ratio && { aspectRatio: ratio, objectFit: 'cover', objectPosition: 'top' }),
             }}
           />
         ) : (
           <Box
             role="img"
-            aria-label={`Screenshot to come: ${shot.alt}`}
+            aria-label={t.screenshot.toComeLabel(alt)}
             sx={{
-              aspectRatio: RATIO,
+              aspectRatio: ratio ?? PLACEHOLDER_RATIO,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -89,7 +93,7 @@ export function Screenshot({ shot, host, showCaption = true, eager = false }: Sc
                 backgroundColor: 'var(--bg-shade)',
               }}
             >
-              Screenshot to come
+              {t.screenshot.toCome}
             </Typography>
             <Typography
               sx={{
@@ -108,7 +112,7 @@ export function Screenshot({ shot, host, showCaption = true, eager = false }: Sc
 
       {showCaption && (
         <Typography component="figcaption" sx={{ ...metaSx, mt: 1.25 }}>
-          {shot.caption}
+          {shot.caption[locale]}
         </Typography>
       )}
     </Box>

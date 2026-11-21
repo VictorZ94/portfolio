@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Box, Typography } from '@mui/material';
 import { Section } from '../components/Section';
 import { Screenshot } from '../components/Screenshot';
@@ -7,25 +6,18 @@ import { ExternalLinks, StatusBadge } from '../components/ProjectMeta';
 import { PROJECTS, findProject } from '../data/projects';
 import { projectHref } from '../router';
 import { displaySx, linkSx, metaSx } from '../styles';
-
-const SITE_TITLE = 'Victor Zuluaga — Senior Full-Stack Engineer';
+import { useLanguage } from '../context/useLanguage';
 
 export function ProjectPage({ slug }: { slug: string }) {
+  const { locale, t } = useLanguage();
   const project = findProject(slug);
-
-  React.useEffect(() => {
-    document.title = project ? `${project.name} — Victor Zuluaga` : SITE_TITLE;
-    return () => {
-      document.title = SITE_TITLE;
-    };
-  }, [project]);
 
   if (!project) {
     return (
       <Box component="main" sx={{ py: 12 }}>
-        <Typography sx={{ ...displaySx(), fontSize: '2rem' }}>Project not found</Typography>
+        <Typography sx={{ ...displaySx(), fontSize: '2rem' }}>{t.project.notFound}</Typography>
         <Box component="a" href="#projects" sx={{ ...linkSx, display: 'inline-block', mt: 2 }}>
-          ← All projects
+          ← {t.project.back}
         </Box>
       </Box>
     );
@@ -40,7 +32,7 @@ export function ProjectPage({ slug }: { slug: string }) {
         <Box component="article" aria-labelledby="project-title">
           <Box sx={{ pt: { xs: 4, md: 6 }, pb: { xs: 6, md: 8 } }}>
             <Box component="a" href="#projects" sx={{ ...linkSx, fontSize: '0.9rem', color: 'var(--soft)' }}>
-              ← All projects
+              ← {t.project.back}
             </Box>
 
             <Box sx={{ mt: { xs: 5, md: 8 } }}>
@@ -67,10 +59,10 @@ export function ProjectPage({ slug }: { slug: string }) {
                   maxWidth: '32ch',
                 }}
               >
-                {project.tagline}
+                {project.tagline[locale]}
               </Typography>
               <Typography sx={{ color: 'var(--soft)', fontSize: '1.1rem', mt: 2, maxWidth: '58ch' }}>
-                {project.summary}
+                {project.summary[locale]}
               </Typography>
 
               <Box
@@ -93,8 +85,8 @@ export function ProjectPage({ slug }: { slug: string }) {
             </Box>
           </Box>
 
-          <Section id="overview" title="Overview">
-            {project.overview.map((paragraph) => (
+          <Section id="overview" title={t.project.overview}>
+            {project.overview[locale].map((paragraph) => (
               <Typography
                 key={paragraph}
                 sx={{ fontSize: '1.15rem', maxWidth: '62ch', '& + &': { mt: 2 } }}
@@ -104,7 +96,7 @@ export function ProjectPage({ slug }: { slug: string }) {
             ))}
           </Section>
 
-          <Section id="how-it-works" title="How it works">
+          <Section id="how-it-works" title={t.project.howItWorks}>
             <Box
               component="ol"
               sx={{
@@ -118,7 +110,7 @@ export function ProjectPage({ slug }: { slug: string }) {
               }}
             >
               {project.steps.map((step, i) => (
-                <Box component="li" key={step.title}>
+                <Box component="li" key={step.title.en}>
                   <Typography
                     aria-hidden
                     sx={{ ...displaySx('120%', 600), color: 'var(--accent)', fontSize: '1.1rem' }}
@@ -126,15 +118,15 @@ export function ProjectPage({ slug }: { slug: string }) {
                     {String(i + 1).padStart(2, '0')}
                   </Typography>
                   <Typography component="h3" sx={{ fontWeight: 600, fontSize: '1.1rem', mt: 0.5 }}>
-                    {step.title}
+                    {step.title[locale]}
                   </Typography>
-                  <Typography sx={{ color: 'var(--soft)', mt: 0.5 }}>{step.body}</Typography>
+                  <Typography sx={{ color: 'var(--soft)', mt: 0.5 }}>{step.body[locale]}</Typography>
                 </Box>
               ))}
             </Box>
           </Section>
 
-          <Section id="highlights" title="Highlights">
+          <Section id="highlights" title={t.project.highlights}>
             <Box
               component="ul"
               sx={{
@@ -150,19 +142,19 @@ export function ProjectPage({ slug }: { slug: string }) {
               {project.highlights.map((item) => (
                 <Box
                   component="li"
-                  key={item.title}
+                  key={item.title.en}
                   sx={{ pl: 2, borderLeft: '3px solid var(--accent)' }}
                 >
                   <Typography component="h3" sx={{ fontWeight: 600, fontSize: '1.05rem' }}>
-                    {item.title}
+                    {item.title[locale]}
                   </Typography>
-                  <Typography sx={{ color: 'var(--soft)', mt: 0.5 }}>{item.body}</Typography>
+                  <Typography sx={{ color: 'var(--soft)', mt: 0.5 }}>{item.body[locale]}</Typography>
                 </Box>
               ))}
             </Box>
           </Section>
 
-          <Section id="screens" title="Screens">
+          <Section id="screens" title={t.project.screens}>
             <Box
               sx={{
                 display: 'grid',
@@ -178,7 +170,7 @@ export function ProjectPage({ slug }: { slug: string }) {
         </Box>
 
         {next !== project && (
-          <Section id="next" title="Next project">
+          <Section id="next" title={t.project.next}>
             <Box
               component="a"
               href={projectHref(next.slug)}
@@ -195,7 +187,7 @@ export function ProjectPage({ slug }: { slug: string }) {
               {next.name} →
             </Box>
             <Typography sx={{ color: 'var(--soft)', mt: 1.5, maxWidth: '48ch' }}>
-              {next.tagline}
+              {next.tagline[locale]}
             </Typography>
           </Section>
         )}
