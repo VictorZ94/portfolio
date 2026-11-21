@@ -1,6 +1,8 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { Section } from '../components/Section';
-import { linkSx, metaSx } from '../styles';
+import { Footer } from '../components/Footer';
+import { linkSx } from '../styles';
+import { useLanguage } from '../context/useLanguage';
 
 const EMAIL = 'zrvictor00@gmail.com';
 
@@ -10,9 +12,10 @@ const LINKS = [
 ] as const;
 
 export function Contact() {
+  const { t } = useLanguage();
   return (
     <>
-      <Section id="contact" title="Contact">
+      <Section id="contact" title={t.contact.title}>
         <Box
           component="a"
           href={`mailto:${EMAIL}`}
@@ -45,9 +48,7 @@ export function Contact() {
         </Box>
       </Section>
 
-      <Box component="footer" sx={{ py: 4, borderTop: '1px solid var(--line)' }}>
-        <Typography sx={metaSx}>© 2026 Victor Zuluaga</Typography>
-      </Box>
+      <Footer />
     </>
   );
 }

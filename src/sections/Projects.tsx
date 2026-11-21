@@ -1,15 +1,13 @@
 import { Box, Typography } from '@mui/material';
 import { Section } from '../components/Section';
+import { Screenshot } from '../components/Screenshot';
+import { ExternalLinks, StatusBadge } from '../components/ProjectMeta';
+import { PROJECTS } from '../data/projects';
+import { projectHref } from '../router';
 import { GITHUB_PROFILE_URL, useGitHubStats } from '../hooks/useGitHubStats';
 import type { GitHubRepo } from '../hooks/useGitHubStats';
-import { linkSx, metaSx } from '../styles';
-
-const FEATURED = {
-  title: 'E-commerce platform',
-  summary: 'Moved a storefront that buckled under sales traffic to an event-driven order pipeline.',
-  outcomes: ['99.7% fewer checkout errors at peak', 'Order processing from 2 hours to 5 minutes'],
-  stack: 'Next.js, Node.js, PostgreSQL, Redis, Stripe',
-};
+import { displaySx, linkSx, metaSx } from '../styles';
+import { useLanguage } from '../context/useLanguage';
 
 const REPO_LIMIT = 4;
 
@@ -24,18 +22,19 @@ function pickRepos(repos: GitHubRepo[]): GitHubRepo[] {
 }
 
 function RepoList() {
+  const { t } = useLanguage();
   const { data, loading, error } = useGitHubStats();
 
   if (loading) {
-    return <Typography sx={metaSx}>Loading repositories…</Typography>;
+    return <Typography sx={metaSx}>{t.projects.loading}</Typography>;
   }
 
   if (error || !data || data.repos.length === 0) {
     return (
       <Typography sx={metaSx}>
-        GitHub didn’t respond.{' '}
+        {t.projects.noResponse}{' '}
         <Box component="a" href={GITHUB_PROFILE_URL} target="_blank" rel="noopener noreferrer" sx={linkSx}>
-          See the repositories on GitHub
+          {t.projects.seeOnGitHub}
         </Box>
       </Typography>
     );
@@ -74,7 +73,7 @@ function RepoList() {
           <Typography sx={{ ...metaSx, display: 'flex', gap: 2, justifyContent: { sm: 'flex-end' } }}>
             {repo.language && <span>{repo.language}</span>}
             {repo.stargazers_count > 0 && (
-              <span aria-label={`${repo.stargazers_count} stars`}>★ {repo.stargazers_count}</span>
+              <span aria-label={t.projects.stars(repo.stargazers_count)}>★ {repo.stargazers_count}</span>
             )}
           </Typography>
         </Box>
@@ -84,51 +83,59 @@ function RepoList() {
 }
 
 export function Projects() {
+  const { locale, t } = useLanguage();
+
   return (
-    <Section id="projects" title="Projects">
-      <Box component="article" sx={{ mb: { xs: 7, md: 9 } }}>
-        <Typography
-          component="h3"
-          sx={{
-            fontSize: { xs: '1.75rem', md: '2.25rem' },
-            fontFamily: 'var(--font-display)',
-            fontWeight: 600,
-            fontStretch: '110%',
-            lineHeight: 1.05,
-          }}
-        >
-          {FEATURED.title}
-        </Typography>
-        <Typography sx={{ mt: 1.5, fontSize: '1.15rem', maxWidth: '46ch' }}>
-          {FEATURED.summary}
-        </Typography>
-        <Box
-          component="ul"
-          sx={{
-            listStyle: 'none',
-            p: 0,
-            m: 0,
-            mt: 3,
-            display: 'flex',
-            flexDirection: { xs: 'column', sm: 'row' },
-            gap: { xs: 1.5, sm: 5 },
-          }}
-        >
-          {FEATURED.outcomes.map((outcome) => (
+    <Section id="projects" title={t.projects.title}>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' },
+          columnGap: 5,
+          rowGap: 7,
+          mb: { xs: 7, md: 9 },
+        }}
+      >
+        {PROJECTS.map((project) => (
+          <Box component="article" key={project.slug} aria-labelledby={`${project.slug}-title`}>
             <Box
-              component="li"
-              key={outcome}
-              sx={{ pl: 2, borderLeft: '3px solid var(--accent)', maxWidth: '24ch', lineHeight: 1.35 }}
+              component="a"
+              href={projectHref(project.slug)}
+              aria-hidden
+              tabIndex={-1}
+              sx={{
+                display: 'block',
+                textDecoration: 'none',
+                transition: 'transform 0.4s var(--ease)',
+                '&:hover': { transform: 'translateY(-4px)' },
+              }}
             >
-              {outcome}
+              <Screenshot shot={project.cover} host={project.host} showCaption={false} ratio="16 / 10" />
             </Box>
-          ))}
-        </Box>
-        <Typography sx={{ ...metaSx, mt: 3 }}>{FEATURED.stack}</Typography>
+            <Box sx={{ mt: 2.5 }}>
+              <StatusBadge status={project.status} />
+            </Box>
+            <Typography
+              component="h3"
+              id={`${project.slug}-title`}
+              sx={{ ...displaySx(), fontSize: { xs: '1.75rem', md: '2rem' }, lineHeight: 1.05, mt: 0.5 }}
+            >
+              {project.name}
+            </Typography>
+            <Typography sx={{ mt: 1, maxWidth: '44ch' }}>{project.tagline[locale]}</Typography>
+            <Typography sx={{ ...metaSx, mt: 1.5 }}>{project.stack.slice(0, 5).join(' · ')}</Typography>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, mt: 2 }}>
+              <Box component="a" href={projectHref(project.slug)} sx={{ ...linkSx, fontWeight: 600 }}>
+                {t.projects.caseStudy} →
+              </Box>
+              <ExternalLinks links={project.links} />
+            </Box>
+          </Box>
+        ))}
       </Box>
 
       <Typography component="h3" sx={{ fontSize: '1.05rem', fontWeight: 600, mb: 1.5 }}>
-        On GitHub
+        {t.projects.onGitHub}
       </Typography>
       <RepoList />
     </Section>

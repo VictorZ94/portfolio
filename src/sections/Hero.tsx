@@ -1,16 +1,18 @@
 import { Box, Typography } from '@mui/material';
 import { displaySx, linkSx, settleIn } from '../styles';
+import { useLanguage } from '../context/useLanguage';
 
 const NAME_LINES = ['Victor', 'Zuluaga'];
 const LETTER_STAGGER = 0.05;
 
 const LINKS = [
-  { label: 'Email', href: 'mailto:zrvictor00@gmail.com' },
+  { label: 'email', href: 'mailto:zrvictor00@gmail.com' },
   { label: 'GitHub', href: 'https://github.com/victorz94' },
   { label: 'LinkedIn', href: 'https://linkedin.com' },
 ] as const;
 
 export function Hero() {
+  const { t } = useLanguage();
   let letterIndex = 0;
 
   return (
@@ -65,7 +67,7 @@ export function Hero() {
           component="p"
           sx={{ ...displaySx('105%', 500), fontSize: { xs: '1.25rem', md: '1.5rem' }, mt: { xs: 2.5, md: 3 } }}
         >
-          Senior Full-Stack Engineer
+          {t.hero.role}
         </Typography>
 
         <Box
@@ -79,7 +81,7 @@ export function Hero() {
           }}
         >
           <Typography sx={{ color: 'var(--soft)', fontSize: '1.1rem', maxWidth: '40ch' }}>
-            I build web products end to end, from the database to the interface.
+            {t.hero.tagline}
           </Typography>
           <Box sx={{ display: 'flex', gap: 3 }}>
             {LINKS.map((link) => (
@@ -91,7 +93,7 @@ export function Hero() {
                 rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 sx={linkSx}
               >
-                {link.label}
+                {link.label === 'email' ? t.hero.email : link.label}
               </Box>
             ))}
           </Box>

@@ -22,6 +22,8 @@ A single-page personal portfolio. React 19 + TypeScript, bundled by Vite 8.
 - New sections use `components/Section.tsx` (heading column + content column) and are added to `Page.tsx`.
 - Design: four calm palettes — Mist (default), Sand, Slate, Forest — defined as `[data-theme]` token blocks in `index.css`, listed in `context/themes.ts`, and switched by the swatch picker in `Header.tsx` (state in `context/ThemeContext.tsx`). Type: **Anybody** (variable width) for display, **Hanken Grotesk** for body. Shared sx helpers (`linkSx`, `metaSx`, `displaySx`, `settleIn`) are in `src/styles.ts`.
 - Projects pulls the top repos from the GitHub API via `hooks/useGitHubStats.ts`.
+- Project case studies live in `src/data/projects.ts` and render at `#/projects/<slug>` (hash router in `src/router.ts`).
+- **i18n (English/Spanish):** `useLanguage()` (`context/LanguageContext.tsx`) gives `{ locale, setLocale, t }`. UI strings are in `src/i18n/messages/en.ts` (source of truth) and `es.ts` (typed against it, so a missing key fails `tsc`); long-form content uses `Localized<T>` (`{ en, es }`) in place, as in `data/projects.ts` and `sections/Work.tsx`. First-visit language comes from `src/i18n/detectLocale.ts`: `?lang=` param, then saved choice (`vz:lang`), then Spanish if the browser prefers Spanish or the time zone is in a Spanish-speaking country, else English. Always add new copy in both locales.
 
 ## Key conventions
 
